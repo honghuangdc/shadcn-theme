@@ -1,6 +1,16 @@
 # Changelog
 
 
+## [v0.0.7](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.6...v0.0.7) (2026-01-17)
+
+### &nbsp;&nbsp;&nbsp;🛠 Optimizations
+
+- **palette**: optimize feedback palette colors for better visibility &nbsp;-&nbsp; by @soybeanjs [<samp>(82525)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/8252585)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
+
 ## [v0.0.6](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.5...v0.0.6) (2026-01-17)
 
 ### &nbsp;&nbsp;&nbsp;🛠 Optimizations
