@@ -1,6 +1,16 @@
 # Changelog
 
 
+## [v0.0.4](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.3...v0.0.4) (2026-01-17)
+
+### &nbsp;&nbsp;&nbsp;🐞 Bug Fixes
+
+- **package**: update module and main entry points to use .js extension &nbsp;-&nbsp; by @soybeanjs [<samp>(8d38c)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/8d38c5d)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
+
 ## [v0.0.3](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.2...v0.0.3) (2026-01-17)
 
 ### &nbsp;&nbsp;&nbsp;💅 Refactors
