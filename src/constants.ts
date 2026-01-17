@@ -1029,8 +1029,8 @@ export const feedbackPalettePreset: FeedbackPalettePreset = {
   }
 };
 
-export const basePaletteKey = Object.keys(basePalettePreset) as BasePaletteKey[];
+export const basePaletteKeys = Object.keys(basePalettePreset) as BasePaletteKey[];
 
-export const themePaletteKey = Object.keys(themePalettePreset) as ThemePaletteKey[];
+export const themePaletteKeys = Object.keys(themePalettePreset) as ThemePaletteKey[];
 
-export const feedbackPaletteKey = Object.keys(feedbackPalettePreset) as FeedbackPaletteKey[];
+export const feedbackPaletteKeys = Object.keys(feedbackPalettePreset) as FeedbackPaletteKey[];
