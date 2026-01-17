@@ -115,8 +115,8 @@ export const basePalettePreset: BasePalettePreset = {
       infoForeground: 'stone.900',
       carbon: 'stone.100',
       carbonForeground: 'stone.900',
-      border: 'stone.800',
-      input: 'stone.800'
+      border: 'stone.700',
+      input: 'stone.700'
     }
   },
   zinc: {
@@ -163,8 +163,8 @@ export const basePalettePreset: BasePalettePreset = {
       infoForeground: 'zinc.900',
       carbon: 'zinc.100',
       carbonForeground: 'zinc.900',
-      border: 'zinc.800',
-      input: 'zinc.800'
+      border: 'zinc.700',
+      input: 'zinc.700'
     }
   },
   neutral: {
@@ -211,8 +211,8 @@ export const basePalettePreset: BasePalettePreset = {
       infoForeground: 'neutral.900',
       carbon: 'neutral.100',
       carbonForeground: 'neutral.900',
-      border: 'neutral.800',
-      input: 'neutral.800'
+      border: 'neutral.700',
+      input: 'neutral.700'
     }
   },
   gray: {
@@ -259,8 +259,8 @@ export const basePalettePreset: BasePalettePreset = {
       warningForeground: 'gray.900',
       infoForeground: 'gray.900',
       carbonForeground: 'gray.900',
-      border: 'gray.800',
-      input: 'gray.800'
+      border: 'gray.700',
+      input: 'gray.700'
     }
   },
   slate: {
@@ -307,8 +307,8 @@ export const basePalettePreset: BasePalettePreset = {
       warningForeground: 'slate.900',
       infoForeground: 'slate.900',
       carbonForeground: 'slate.900',
-      border: 'slate.800',
-      input: 'slate.800'
+      border: 'slate.700',
+      input: 'slate.700'
     }
   }
 };
