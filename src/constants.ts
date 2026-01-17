@@ -1,4 +1,13 @@
-import type { BasePalettePreset, DarkSelector, FeedbackPalettePreset, ShadcnTheme, ThemePalettePreset } from './types';
+import type {
+  BasePaletteKey,
+  BasePalettePreset,
+  DarkSelector,
+  FeedbackPaletteKey,
+  FeedbackPalettePreset,
+  ShadcnTheme,
+  ThemePaletteKey,
+  ThemePalettePreset
+} from './types';
 
 export const THEME_VARIABLES = {
   // radius
@@ -1019,3 +1028,9 @@ export const FEEDBACK_PALETTE_PRESET: FeedbackPalettePreset = {
     }
   }
 };
+
+export const basePaletteKey = Object.keys(BASE_PALETTE_PRESET) as BasePaletteKey[];
+
+export const themePaletteKey = Object.keys(THEME_PALETTE_PRESET) as ThemePaletteKey[];
+
+export const feedbackPaletteKey = Object.keys(FEEDBACK_PALETTE_PRESET) as FeedbackPaletteKey[];
