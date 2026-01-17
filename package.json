@@ -2,12 +2,24 @@
   "name": "@soybeanjs/shadcn-theme",
   "type": "module",
   "version": "0.0.0",
-  "private": true,
   "packageManager": "pnpm@10.28.0",
+  "description": "A powerful and flexible shadcn/ui theme generator with support for dynamic CSS variable injection, preset color schemes, and light/dark mode switching.",
+  "author": {
+    "name": "Soybean",
+    "email": "soybeanjs@outlook.com",
+    "url": "https://github.com/soybeanjs"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/soybeanjs/shadcn-theme",
+  "repository": {
+    "url": "https://github.com/soybeanjs/shadcn-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/soybeanjs/shadcn-theme/issues"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
