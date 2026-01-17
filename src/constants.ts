@@ -316,7 +316,7 @@ export const basePalettePreset: BasePalettePreset = {
 export const themePalettePreset: ThemePalettePreset = {
   stone: {
     light: {
-      primary: 'stone.900',
+      primary: 'stone.800',
       ring: 'stone.400',
       chart1: 'orange.600',
       chart2: 'teal.600',
@@ -336,7 +336,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   zinc: {
     light: {
-      primary: 'zinc.900',
+      primary: 'zinc.800',
       ring: 'stone.400',
       chart1: 'orange.600',
       chart2: 'teal.600',
@@ -356,7 +356,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   neutral: {
     light: {
-      primary: 'neutral.900',
+      primary: 'neutral.800',
       ring: 'stone.400',
       chart1: 'orange.600',
       chart2: 'teal.600',
@@ -376,7 +376,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   gray: {
     light: {
-      primary: 'gray.900',
+      primary: 'gray.800',
       ring: 'stone.400',
       chart1: 'orange.600',
       chart2: 'teal.600',
@@ -396,7 +396,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   slate: {
     light: {
-      primary: 'slate.900',
+      primary: 'slate.800',
       ring: 'stone.400',
       chart1: 'orange.600',
       chart2: 'teal.600',
@@ -416,7 +416,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   red: {
     light: {
-      primary: 'red.600',
+      primary: 'red.500',
       ring: 'red.400',
       chart1: 'red.300',
       chart2: 'red.500',
@@ -436,7 +436,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   orange: {
     light: {
-      primary: 'orange.600',
+      primary: 'orange.500',
       ring: 'orange.400',
       chart1: 'orange.300',
       chart2: 'orange.500',
@@ -456,7 +456,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   amber: {
     light: {
-      primary: 'amber.400',
+      primary: 'amber.500',
       ring: 'amber.400',
       chart1: 'amber.300',
       chart2: 'amber.500',
@@ -476,27 +476,27 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   yellow: {
     light: {
-      primary: 'amber.400',
-      ring: 'amber.400',
-      chart1: 'amber.300',
-      chart2: 'amber.500',
-      chart3: 'amber.600',
-      chart4: 'amber.700',
-      chart5: 'amber.800'
+      primary: 'yellow.500',
+      ring: 'yellow.400',
+      chart1: 'yellow.300',
+      chart2: 'yellow.500',
+      chart3: 'yellow.600',
+      chart4: 'yellow.700',
+      chart5: 'yellow.800'
     },
     dark: {
-      primary: 'amber.500',
-      ring: 'amber.900',
-      chart1: 'amber.300',
-      chart2: 'amber.500',
-      chart3: 'amber.600',
-      chart4: 'amber.700',
-      chart5: 'amber.800'
+      primary: 'yellow.500',
+      ring: 'yellow.900',
+      chart1: 'yellow.300',
+      chart2: 'yellow.500',
+      chart3: 'yellow.600',
+      chart4: 'yellow.700',
+      chart5: 'yellow.800'
     }
   },
   lime: {
     light: {
-      primary: 'lime.600',
+      primary: 'lime.500',
       ring: 'lime.400',
       chart1: 'lime.300',
       chart2: 'lime.500',
@@ -516,7 +516,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   green: {
     light: {
-      primary: 'green.600',
+      primary: 'green.500',
       ring: 'green.400',
       chart1: 'green.300',
       chart2: 'green.500',
@@ -556,7 +556,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   teal: {
     light: {
-      primary: 'teal.400',
+      primary: 'teal.500',
       ring: 'teal.400',
       chart1: 'teal.300',
       chart2: 'teal.500',
@@ -565,7 +565,7 @@ export const themePalettePreset: ThemePalettePreset = {
       chart5: 'teal.800'
     },
     dark: {
-      primary: 'teal.600',
+      primary: 'teal.500',
       ring: 'teal.900',
       chart1: 'teal.300',
       chart2: 'teal.500',
@@ -576,7 +576,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   cyan: {
     light: {
-      primary: 'cyan.600',
+      primary: 'cyan.500',
       ring: 'cyan.400',
       chart1: 'cyan.300',
       chart2: 'cyan.500',
@@ -596,7 +596,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   sky: {
     light: {
-      primary: 'sky.600',
+      primary: 'sky.500',
       ring: 'sky.400',
       chart1: 'sky.300',
       chart2: 'sky.500',
@@ -616,7 +616,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   blue: {
     light: {
-      primary: 'blue.600',
+      primary: 'blue.500',
       ring: 'blue.400',
       chart1: 'blue.300',
       chart2: 'blue.500',
@@ -636,7 +636,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   indigo: {
     light: {
-      primary: 'indigo.600',
+      primary: 'indigo.500',
       ring: 'indigo.400',
       chart1: 'indigo.300',
       chart2: 'indigo.500',
@@ -656,7 +656,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   violet: {
     light: {
-      primary: 'violet.600',
+      primary: 'violet.500',
       ring: 'violet.400',
       chart1: 'violet.300',
       chart2: 'violet.500',
@@ -676,7 +676,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   purple: {
     light: {
-      primary: 'purple.600',
+      primary: 'purple.500',
       ring: 'purple.400',
       chart1: 'purple.300',
       chart2: 'purple.500',
@@ -696,7 +696,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   fuchsia: {
     light: {
-      primary: 'fuchsia.600',
+      primary: 'fuchsia.500',
       ring: 'fuchsia.400',
       chart1: 'fuchsia.300',
       chart2: 'fuchsia.500',
@@ -716,7 +716,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   pink: {
     light: {
-      primary: 'pink.600',
+      primary: 'pink.500',
       ring: 'pink.400',
       chart1: 'pink.300',
       chart2: 'pink.500',
@@ -736,7 +736,7 @@ export const themePalettePreset: ThemePalettePreset = {
   },
   rose: {
     light: {
-      primary: 'rose.600',
+      primary: 'rose.500',
       ring: 'rose.400',
       chart1: 'rose.300',
       chart2: 'rose.500',
