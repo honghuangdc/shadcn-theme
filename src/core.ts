@@ -223,7 +223,7 @@ function generateCSSVariablesPalette(themeColors: CSSVariablesPalette, format: '
         value = removeHslBrackets(value);
       }
 
-      css += `${key}-${level}: ${value};\n`;
+      css += `--${key}-${level}: ${value};\n`;
     });
   });
 
