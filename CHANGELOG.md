@@ -1,6 +1,16 @@
 # Changelog
 
 
+## [v0.0.3](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.2...v0.0.3) (2026-01-17)
+
+### &nbsp;&nbsp;&nbsp;💅 Refactors
+
+- **constants**: update export variable names for palette keys &nbsp;-&nbsp; by @soybeanjs [<samp>(40ee0)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/40ee084)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
+
 ## [v0.0.2](https://github.com/honghuangdc/shadcn-theme/compare/v0.0.1...v0.0.2) (2026-01-17)
 
 ### &nbsp;&nbsp;&nbsp;🚀 Features
