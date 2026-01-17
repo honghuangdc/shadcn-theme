@@ -1,6 +1,16 @@
 # Changelog
 
 
+## [v0.0.8](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.7...v0.0.8) (2026-01-17)
+
+### &nbsp;&nbsp;&nbsp;🐞 Bug Fixes
+
+- **constants**: replace oklch color values with corresponding stone and zinc shades in basePalettePreset &nbsp;-&nbsp; by @soybeanjs [<samp>(8f6d4)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/8f6d4cf)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
+
 ## [v0.0.7](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.6...v0.0.7) (2026-01-17)
 
 ### &nbsp;&nbsp;&nbsp;🛠 Optimizations
