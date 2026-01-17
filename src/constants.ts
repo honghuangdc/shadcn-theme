@@ -115,8 +115,8 @@ export const basePalettePreset: BasePalettePreset = {
       infoForeground: 'stone.900',
       carbon: 'stone.100',
       carbonForeground: 'stone.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: 'stone.800',
+      input: 'stone.800'
     }
   },
   zinc: {
@@ -163,8 +163,8 @@ export const basePalettePreset: BasePalettePreset = {
       infoForeground: 'zinc.900',
       carbon: 'zinc.100',
       carbonForeground: 'zinc.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: 'zinc.800',
+      input: 'zinc.800'
     }
   },
   neutral: {
@@ -211,8 +211,8 @@ export const basePalettePreset: BasePalettePreset = {
       infoForeground: 'neutral.900',
       carbon: 'neutral.100',
       carbonForeground: 'neutral.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: 'neutral.800',
+      input: 'neutral.800'
     }
   },
   gray: {
@@ -259,8 +259,8 @@ export const basePalettePreset: BasePalettePreset = {
       warningForeground: 'gray.900',
       infoForeground: 'gray.900',
       carbonForeground: 'gray.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: 'gray.800',
+      input: 'gray.800'
     }
   },
   slate: {
@@ -307,8 +307,8 @@ export const basePalettePreset: BasePalettePreset = {
       warningForeground: 'slate.900',
       infoForeground: 'slate.900',
       carbonForeground: 'slate.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: 'slate.800',
+      input: 'slate.800'
     }
   }
 };
