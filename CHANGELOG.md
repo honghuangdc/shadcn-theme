@@ -1,6 +1,24 @@
 # Changelog
 
 
+## [v0.0.2](https://github.com/honghuangdc/shadcn-theme/compare/v0.0.1...v0.0.2) (2026-01-17)
+
+### &nbsp;&nbsp;&nbsp;🚀 Features
+
+- **constants**: enhance palette exports and add key constants &nbsp;-&nbsp; by @soybeanjs [<samp>(7027c)</samp>](https://github.com/honghuangdc/shadcn-theme/commit/7027c2e)
+
+### &nbsp;&nbsp;&nbsp;💅 Refactors
+
+- **constants**: rename palette presets for consistency and update exports &nbsp;-&nbsp; by @soybeanjs [<samp>(3e807)</samp>](https://github.com/honghuangdc/shadcn-theme/commit/3e8076e)
+
+### &nbsp;&nbsp;&nbsp;📖 Documentation
+
+- **projects**: add CHANGELOG.md &nbsp;-&nbsp; by @soybeanjs [<samp>(59055)</samp>](https://github.com/honghuangdc/shadcn-theme/commit/590556d)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
+
 ## [v0.0.1](https://github.com/honghuangdc/shadcn-theme/compare/v0.0.1...main) (2026-01-17)
 
 ### &nbsp;&nbsp;&nbsp;🚀 Features
