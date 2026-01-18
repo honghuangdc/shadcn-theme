@@ -1,52 +1,5 @@
 import type { TailwindPaletteKey, TailwindPaletteLevelColorKey } from '@soybeanjs/colord/palette';
 
-/**
- * the base palette key
- */
-export type BasePaletteKey = Extract<TailwindPaletteKey, 'stone' | 'zinc' | 'neutral' | 'gray' | 'slate'>;
-
-export type FeedbackPaletteKey =
-  | 'classic'
-  | 'vivid'
-  | 'subtle'
-  | 'warm'
-  | 'cool'
-  | 'nature'
-  | 'modern'
-  | 'vibrant'
-  | 'professional'
-  | 'soft'
-  | 'bold'
-  | 'calm'
-  | 'candy'
-  | 'deep'
-  | 'light';
-
-export type ThemePaletteKey = TailwindPaletteKey;
-
-/**
- * the preset config
- */
-export interface PresetConfig {
-  /**
-   * the base palette key
-   *
-   * @default 'stone'
-   */
-  base?: BasePaletteKey;
-  /** the theme palette key
-   *
-   * @default 'indigo'
-   */
-  theme?: ThemePaletteKey;
-  /**
-   * the feedback palette key
-   *
-   * @default 'classic'
-   */
-  feedback?: FeedbackPaletteKey;
-}
-
 export interface ThemeRadius {
   /**
    * the border radius
@@ -62,7 +15,7 @@ export type OKLCHColor = `oklch(${number}% ${number} ${number})` | `oklch(${numb
 
 export type ColorValue = HSLColor | OKLCHColor | TailwindPaletteLevelColorKey;
 
-export interface BaseThemeColors {
+export interface ShadcnColors {
   background?: ColorValue;
   foreground?: ColorValue;
   card?: ColorValue;
@@ -83,10 +36,11 @@ export interface BaseThemeColors {
   input?: ColorValue;
   ring?: ColorValue;
 }
+
 /**
- * sidebar theme colors
+ * sidebar colors
  */
-export interface SidebarThemeColors {
+export interface SidebarColors {
   /**
    * the sidebar background color
    *
@@ -138,9 +92,9 @@ export interface SidebarThemeColors {
 }
 
 /**
- * chart theme colors
+ * chart colors
  */
-export interface ChartThemeColors {
+export interface ChartColors {
   chart1?: ColorValue;
   chart2?: ColorValue;
   chart3?: ColorValue;
@@ -148,7 +102,7 @@ export interface ChartThemeColors {
   chart5?: ColorValue;
 }
 
-export interface ExtendedThemeColors {
+export interface ExtendedColors {
   success?: ColorValue;
   successForeground?: ColorValue;
   warning?: ColorValue;
@@ -159,25 +113,76 @@ export interface ExtendedThemeColors {
   carbonForeground?: ColorValue;
 }
 
-export interface ThemeColors extends BaseThemeColors, ExtendedThemeColors, SidebarThemeColors, ChartThemeColors {}
+export interface ThemeColors extends ShadcnColors, ExtendedColors, SidebarColors, ChartColors {}
 
-export interface ShadcnTheme extends ThemeColors, ThemeRadius {}
+export type ThemeColorKey = keyof ThemeColors;
+export type ThemeColorWithAlphaKey = keyof Pick<ThemeColors, 'border' | 'input' | 'sidebarBorder'>;
 
-export type ThemeColorsKey = keyof ThemeColors;
-export type ThemeColorAlphaKey = keyof Pick<ThemeColors, 'border' | 'input' | 'sidebarBorder'>;
+/**
+ * the built-in base color preset key
+ */
+export type BuiltinBasePresetKey = Extract<TailwindPaletteKey, 'stone' | 'zinc' | 'neutral' | 'gray' | 'slate'>;
 
-export type BasePalettePresetColorKey =
-  | keyof Omit<BaseThemeColors, 'primary' | 'destructive' | 'ring'>
-  | keyof Pick<
-      ExtendedThemeColors,
-      'successForeground' | 'warningForeground' | 'infoForeground' | 'carbon' | 'carbonForeground'
-    >;
+/**
+ * the built-in primary color preset key
+ */
+export type BuiltinPrimaryPresetKey = TailwindPaletteKey;
 
-export type ThemePalettePresetColorKey = keyof Pick<BaseThemeColors, 'ring' | 'primary'> | keyof ChartThemeColors;
+/**
+ * the built-in feedback color preset key
+ */
+export type BuiltinFeedbackPresetKey =
+  | 'classic'
+  | 'vivid'
+  | 'subtle'
+  | 'warm'
+  | 'cool'
+  | 'nature'
+  | 'modern'
+  | 'vibrant'
+  | 'professional'
+  | 'soft'
+  | 'bold'
+  | 'calm'
+  | 'candy'
+  | 'deep'
+  | 'light';
 
-export type FeedbackPalettePresetColorKey =
-  | keyof Pick<BaseThemeColors, 'destructive'>
-  | keyof Pick<ExtendedThemeColors, 'success' | 'warning' | 'info'>;
+export type BasePresetColorKey = Extract<
+  ThemeColorKey,
+  | 'background'
+  | 'foreground'
+  | 'card'
+  | 'cardForeground'
+  | 'popover'
+  | 'popoverForeground'
+  | 'primaryForeground'
+  | 'secondary'
+  | 'secondaryForeground'
+  | 'muted'
+  | 'mutedForeground'
+  | 'accent'
+  | 'accentForeground'
+  | 'border'
+  | 'input'
+  | 'destructiveForeground'
+  | 'successForeground'
+  | 'warningForeground'
+  | 'infoForeground'
+  | 'carbon'
+  | 'carbonForeground'
+>;
+
+export type PrimaryPresetColorKey = Extract<ThemeColorKey, 'primary' | 'ring'> | keyof ChartColors;
+
+export type FeedbackPresetColorKey = Extract<ThemeColorKey, 'destructive' | 'success' | 'warning' | 'info'>;
+
+export type SidebarPresetColorKey = keyof SidebarColors;
+
+export type SidebarExtendedColorKey = Extract<
+  ThemeColorKey,
+  'background' | 'foreground' | 'primary' | 'primaryForeground' | 'accent' | 'accentForeground' | 'border' | 'ring'
+>;
 
 export type PresetItem<K extends string> = {
   light: {
@@ -188,52 +193,78 @@ export type PresetItem<K extends string> = {
   };
 };
 
-export type BasePalettePreset = Record<BasePaletteKey, PresetItem<BasePalettePresetColorKey>>;
+export type BasePresetItem = PresetItem<BasePresetColorKey>;
+export type PrimaryPresetItem = PresetItem<PrimaryPresetColorKey>;
+export type FeedbackPresetItem = PresetItem<FeedbackPresetColorKey>;
+export type SidebarPresetItem = PresetItem<SidebarPresetColorKey>;
+export type SidebarExtendedPresetItem = PresetItem<SidebarExtendedColorKey>;
+export type ThemeColorPresetItem = PresetItem<ThemeColorKey>;
 
-export type ThemePalettePreset = Record<TailwindPaletteKey, PresetItem<ThemePalettePresetColorKey>>;
-
-export type FeedbackPalettePreset = Record<FeedbackPaletteKey, PresetItem<FeedbackPalettePresetColorKey>>;
-
-export type SidebarExtendedPaletteKey = keyof Pick<
-  ThemeColors,
-  'background' | 'foreground' | 'primary' | 'primaryForeground' | 'accent' | 'accentForeground' | 'border' | 'ring'
->;
-
-export type SidebarExtendedPalettePreset = PresetItem<SidebarExtendedPaletteKey>;
-
-export type SidebarPalettePreset = PresetItem<keyof SidebarThemeColors>;
-
-export type ThemeColorPreset = PresetItem<ThemeColorsKey>;
+export type StyleTarget = 'html' | ':root';
 
 export type DarkSelector = 'class' | 'media';
 
 export type ColorFormat = 'hsl' | 'oklch';
 
+export interface CustomPreset {
+  base?: Record<string, BasePresetItem>;
+  primary?: Record<string, PrimaryPresetItem>;
+  feedback?: Record<string, FeedbackPresetItem>;
+  /**
+   * the sidebar presets
+   *
+   * if not set, will use extended colors from base and primary colors
+   */
+  sidebar?: Record<string, SidebarPresetItem>;
+}
+
+export type FullPreset<T extends CustomPreset | undefined> = {
+  base: Record<BuiltinBasePresetKey | (T extends CustomPreset ? keyof T['base'] : never), BasePresetItem>;
+  primary: Record<BuiltinPrimaryPresetKey | (T extends CustomPreset ? keyof T['primary'] : never), PrimaryPresetItem>;
+  feedback: Record<
+    BuiltinFeedbackPresetKey | (T extends CustomPreset ? keyof T['feedback'] : never),
+    FeedbackPresetItem
+  >;
+  sidebar?: Record<T extends CustomPreset ? keyof T['sidebar'] : never, SidebarPresetItem>;
+};
+
+/**
+ * the preset config
+ */
+export interface PresetConfig<T extends CustomPreset | undefined = undefined> {
+  /**
+   * the base color key
+   *
+   * @default 'gray'
+   */
+  base?: keyof FullPreset<T>['base'];
+  /** the primary color key
+   *
+   * @default 'indigo'
+   */
+  primary?: keyof FullPreset<T>['primary'];
+  /**
+   * the feedback color key
+   *
+   * @default 'classic'
+   */
+  feedback?: keyof FullPreset<T>['feedback'];
+  /**
+   * the sidebar style key
+   *
+   * @default 'extended' it means using extended colors from base and primary colors
+   */
+  sidebar?: 'extended' | keyof FullPreset<T>['sidebar'];
+}
+
 /**
  * theme options
  */
-export interface ThemeOptions {
+export interface ThemeOptions<T extends CustomPreset | undefined = undefined> extends PresetConfig<T>, ThemeRadius {
   /**
-   * presets config
-   *
-   * this priority is higher than the theme and darkTheme
+   * custom preset colors
    */
-  presets?: PresetConfig;
-  /**
-   * theme color config
-   */
-  theme?: {
-    /**
-     * light theme
-     */
-    light: Required<ThemeColors>;
-    /**
-     * dark theme
-     *
-     * if not set, will use the light theme to generate dark variant colors
-     */
-    dark?: Required<ThemeColors>;
-  };
+  preset?: T;
   /**
    * the border radius
    *
@@ -241,17 +272,11 @@ export interface ThemeOptions {
    */
   radius?: string;
   /**
-   * the style id
-   *
-   * @default 'SHADCN_THEME_STYLES'
-   */
-  styleId?: string;
-  /**
    * the style target
    *
    * @default ':root'
    */
-  styleTarget?: 'html' | ':root';
+  styleTarget?: StyleTarget;
   /**
    * dark mode selector
    *

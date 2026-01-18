@@ -1,18 +1,18 @@
+import { keysOf } from './shared';
 import type {
-  BasePaletteKey,
-  BasePalettePreset,
+  BasePresetItem,
+  BuiltinBasePresetKey,
+  BuiltinFeedbackPresetKey,
+  BuiltinPrimaryPresetKey,
   DarkSelector,
-  FeedbackPaletteKey,
-  FeedbackPalettePreset,
-  ShadcnTheme,
-  ThemePaletteKey,
-  ThemePalettePreset
+  FeedbackPresetItem,
+  PrimaryPresetItem,
+  ThemeColorKey
 } from './types';
 
-export const THEME_VARIABLES = {
-  // radius
-  radius: '--radius',
+export const RADIUS_VARIABLE = '--radius';
 
+export const COLOR_VARIABLES = {
   // base colors
   background: '--background',
   foreground: '--foreground',
@@ -60,7 +60,7 @@ export const THEME_VARIABLES = {
   chart3: '--chart-3',
   chart4: '--chart-4',
   chart5: '--chart-5'
-} as const satisfies Record<keyof ShadcnTheme, string>;
+} as const satisfies Record<ThemeColorKey, string>;
 
 export const EXTENDED_THEME_VARIABLES = {
   borderAlpha: '--border-alpha',
@@ -76,7 +76,10 @@ export const DARK_SELECTOR = {
   media: '@media (prefers-color-scheme: dark)'
 } as const satisfies Record<DarkSelector, string>;
 
-export const basePalettePreset: BasePalettePreset = {
+/**
+ * builtin base color preset
+ */
+export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePresetItem> = {
   stone: {
     light: {
       background: 'oklch(100% 0 0)',
@@ -319,7 +322,10 @@ export const basePalettePreset: BasePalettePreset = {
   }
 };
 
-export const themePalettePreset: ThemePalettePreset = {
+/**
+ * builtin primary color preset
+ */
+export const builtinPrimaryPreset: Record<BuiltinPrimaryPresetKey, PrimaryPresetItem> = {
   stone: {
     light: {
       primary: 'stone.800',
@@ -762,7 +768,10 @@ export const themePalettePreset: ThemePalettePreset = {
   }
 };
 
-export const feedbackPalettePreset: FeedbackPalettePreset = {
+/**
+ * builtin feedback color preset
+ */
+export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPresetItem> = {
   /**
    * Classic standard combination for most scenarios
    * 经典标准 . 最常见的组合，适用于大多数场景
@@ -1035,8 +1044,8 @@ export const feedbackPalettePreset: FeedbackPalettePreset = {
   }
 };
 
-export const basePaletteKeys = Object.keys(basePalettePreset) as BasePaletteKey[];
+export const builtinBasePresetKeys = keysOf(builtinBasePreset);
 
-export const themePaletteKeys = Object.keys(themePalettePreset) as ThemePaletteKey[];
+export const builtinPrimaryPresetKeys = keysOf(builtinPrimaryPreset);
 
-export const feedbackPaletteKeys = Object.keys(feedbackPalettePreset) as FeedbackPaletteKey[];
+export const builtinFeedbackPresetKeys = keysOf(builtinFeedbackPreset);
