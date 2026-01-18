@@ -3,6 +3,7 @@ import { generatePalette, tailwindPalette, tailwindPaletteHsl } from '@soybeanjs
 import type { PaletteColorLevel, TailwindPaletteKey } from '@soybeanjs/colord/palette';
 import {
   DARK_SELECTOR,
+  EXTENDED_THEME_VARIABLES,
   THEME_VARIABLES,
   basePalettePreset,
   feedbackPalettePreset,
@@ -10,14 +11,17 @@ import {
 } from './constants';
 import { isTailwindPaletteLevelColorKey, keysOf, mountCSSVariables, removeHslBrackets } from './shared';
 import type {
+  ColorFormat,
   ColorValue,
   DarkSelector,
   OKLCHColor,
   PresetConfig,
   SidebarExtendedPalettePreset,
   SidebarPalettePreset,
+  ThemeColorAlphaKey,
   ThemeColorPreset,
   ThemeColors,
+  ThemeColorsKey,
   ThemeOptions
 } from './types';
 
@@ -143,7 +147,7 @@ function generateDarkVariant(lightColor: ColorValue): string {
   return color.toOklchString();
 }
 
-function getColorValue(colorValue: ColorValue, format: 'hsl' | 'oklch', removeHslBracket: boolean = false) {
+function getColorValue(colorValue: ColorValue, format: ColorFormat) {
   let color: string = colorValue;
 
   if (!isTailwindPaletteLevelColorKey(colorValue)) {
@@ -158,10 +162,6 @@ function getColorValue(colorValue: ColorValue, format: 'hsl' | 'oklch', removeHs
     const [paletteKey, level] = colorValue.split('.') as [TailwindPaletteKey, PaletteColorLevel];
 
     color = format === 'hsl' ? tailwindPaletteHsl[paletteKey][level] : tailwindPalette[paletteKey][level];
-  }
-
-  if (removeHslBracket) {
-    color = removeHslBrackets(color);
   }
 
   return color;
@@ -181,11 +181,8 @@ function generateCSSVariables(
     if (key === 'radius') {
       lightCss += `${THEME_VARIABLES[key]}: ${radius};\n`;
     } else {
-      const lightColor = getColorValue(light[key], format, true);
-      const darkColor = getColorValue(dark[key], format, true);
-
-      lightCss += `${THEME_VARIABLES[key]}: ${lightColor};\n`;
-      darkCss += `${THEME_VARIABLES[key]}: ${darkColor};\n`;
+      lightCss += getItemColorCSSVariables(key, format, light);
+      darkCss += getItemColorCSSVariables(key, format, dark);
     }
   });
 
@@ -203,12 +200,76 @@ function generateCSSVariables(
   return css;
 }
 
+function getItemColorCSSVariables(
+  key: ThemeColorsKey,
+  format: ColorFormat,
+  preset: Record<ThemeColorsKey, ColorValue>
+) {
+  let color = getColorValue(preset[key], format);
+  if (format === 'hsl') {
+    color = removeHslBrackets(color);
+  }
+  const { color: c, alphaCss } = getAlphaCSSVariables(color, format, key);
+
+  color = c;
+
+  let css = `${THEME_VARIABLES[key]}: ${color};\n`;
+  css += alphaCss;
+
+  return css;
+}
+
+/**
+ *
+ * @param colorValue format is hsl without brackets: "hue, saturation, lightness / alpha"
+ * @param format
+ */
+function getAlphaCSSVariables(colorValue: string, format: ColorFormat, key: string) {
+  const alphaKeys: ThemeColorAlphaKey[] = ['border', 'input', 'sidebarBorder'];
+
+  if (format === 'oklch' || !alphaKeys.includes(key as ThemeColorAlphaKey)) {
+    return {
+      color: colorValue,
+      alphaCss: ''
+    };
+  }
+
+  let [color, alphaString = '1'] = colorValue.split('/');
+
+  color = color.trim();
+  alphaString = alphaString.trim();
+
+  let alpha = Number.parseFloat(alphaString);
+  if (alphaString.endsWith('%')) {
+    alpha /= 100;
+  }
+
+  let alphaCss = '';
+
+  if (key === 'border') {
+    alphaCss = `${EXTENDED_THEME_VARIABLES.borderAlpha}: ${alpha};\n`;
+  }
+
+  if (key === 'input') {
+    alphaCss += `${EXTENDED_THEME_VARIABLES.inputAlpha}: ${alpha};\n`;
+  }
+
+  if (key === 'sidebarBorder') {
+    alphaCss += `${EXTENDED_THEME_VARIABLES.sidebarBorderAlpha}: ${alpha};\n`;
+  }
+
+  return {
+    color,
+    alphaCss
+  };
+}
+
 type CSSVariablesPalette = Pick<
   Required<ThemeColors>,
   'primary' | 'destructive' | 'success' | 'warning' | 'info' | 'carbon'
 >;
 
-function generateCSSVariablesPalette(themeColors: CSSVariablesPalette, format: 'hsl' | 'oklch') {
+function generateCSSVariablesPalette(themeColors: CSSVariablesPalette, format: ColorFormat) {
   const keys: (keyof CSSVariablesPalette)[] = ['primary', 'destructive', 'success', 'warning', 'info', 'carbon'];
 
   let css = '';

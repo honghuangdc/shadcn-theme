@@ -163,6 +163,9 @@ export interface ThemeColors extends BaseThemeColors, ExtendedThemeColors, Sideb
 
 export interface ShadcnTheme extends ThemeColors, ThemeRadius {}
 
+export type ThemeColorsKey = keyof ThemeColors;
+export type ThemeColorAlphaKey = keyof Pick<ThemeColors, 'border' | 'input' | 'sidebarBorder'>;
+
 export type BasePalettePresetColorKey =
   | keyof Omit<BaseThemeColors, 'primary' | 'destructive' | 'ring'>
   | keyof Pick<
@@ -200,9 +203,11 @@ export type SidebarExtendedPalettePreset = PresetItem<SidebarExtendedPaletteKey>
 
 export type SidebarPalettePreset = PresetItem<keyof SidebarThemeColors>;
 
-export type ThemeColorPreset = PresetItem<keyof ThemeColors>;
+export type ThemeColorPreset = PresetItem<ThemeColorsKey>;
 
 export type DarkSelector = 'class' | 'media';
+
+export type ColorFormat = 'hsl' | 'oklch';
 
 /**
  * theme options
@@ -265,5 +270,5 @@ export interface ThemeOptions {
    *
    * @default 'hsl'
    */
-  format?: 'hsl' | 'oklch';
+  format?: ColorFormat;
 }
