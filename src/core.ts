@@ -40,7 +40,13 @@ export function createShadcnTheme(options?: ThemeOptions) {
 
   const css = generateCSSVariables(colorPreset, { radius, styleTarget, darkSelector, format });
 
-  mountCSSVariables(css, styleId);
+  const mountCss = () => {
+    mountCSSVariables(css, styleId);
+  };
+
+  return {
+    mountCss
+  };
 }
 
 function generateColorPreset(presets?: PresetConfig) {
