@@ -1,6 +1,24 @@
 # Changelog
 
 
+## [v0.0.11](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.10...v0.0.11) (2026-01-18)
+
+### &nbsp;&nbsp;&nbsp;🚨 Breaking Changes
+
+- **projects**: Return `mountCss` function from `createTheme` for explicit CSS variable mounting. &nbsp;-&nbsp; by @soybeanjs [<samp>(887bd)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/887bd5d)
+
+### &nbsp;&nbsp;&nbsp;🚀 Features
+
+- **projects**: Extract color alpha into separate CSS variables and update default border/input presets with alpha values. &nbsp;-&nbsp; by @soybeanjs [<samp>(988f2)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/988f212)
+
+### &nbsp;&nbsp;&nbsp;🏡 Chore
+
+- **deps**: update deps &nbsp;-&nbsp; by @soybeanjs [<samp>(73ffb)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/73ffba4)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
+
 ## [v0.0.10](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.9...v0.0.10) (2026-01-17)
 
 ### &nbsp;&nbsp;&nbsp;🐞 Bug Fixes
