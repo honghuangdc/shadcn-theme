@@ -37,7 +37,8 @@ const custom = createShadcnTheme({
   primary: 'blue',
   feedback: 'vivid',
   sidebar: 'extended',
-  radius: '0.5rem',
+  radius: '0.625rem',
+  styleTarget: ':root',
   darkSelector: 'class',
   format: 'hsl'
 });
@@ -67,18 +68,18 @@ applyTheme(theme.getCss({ primary: 'emerald' }));
 
 ### Custom Preset
 
-Using the `preset` parameter, you can provide a complete custom color configuration that overrides the built-in base/primary/feedback/sidebar presets. When using a custom preset, you need to provide complete color definitions.
+Through the `preset` parameter, you can use custom color configurations to override the built-in base/primary/feedback/sidebar presets.
 
 #### 1) When to use custom preset
 
-- Use `preset` to provide a complete custom color configuration when built-in preset combinations cannot meet your design requirements.
-- When using a custom preset, all base/primary/feedback/sidebar related parameters will be ignored, only the `preset` configuration is used.
+- When built-in preset combinations cannot meet your design requirements, use `preset` to pass a custom color configuration.
+- When using a custom preset, you can use `base`/`primary`/`feedback`/`sidebar` with `custom` value to apply the custom preset.
 
 #### 2) Color values and `format`
 
-- Each color value supports: Tailwind palette reference (e.g. `slate.500`), `hsl(...)`, `oklch(...)`, or the builtin permitted color names (`inherit`, `currentColor`, `transparent`, `black`, `white`).
-- `format: 'hsl'`: outputs `h s l [/ alpha]` (no outer `hsl(...)`); `oklch(...)` inputs are converted to HSL.
-- `format: 'oklch'`: outputs values with the outer `oklch(...)`; `hsl(...)` inputs are converted to OKLCH.
+- Each color value supports three forms: Tailwind palette reference (e.g. `slate.500`), `hsl(...)`, `oklch(...)`, or builtin color names (`inherit`, `currentColor`, `transparent`, `black`, `white`).
+- `format: 'hsl'`: outputs `h s l [/ alpha]` (no outer `hsl(...)`); if input is `oklch(...)` it converts to hsl.
+- `format: 'oklch'`: outputs values with outer `oklch(...)` wrapper; if input is `hsl(...)` it converts to oklch.
 
 #### Quick example: Complete custom preset
 
@@ -183,12 +184,6 @@ const theme = createShadcnTheme({
 const css = theme.getCss();
 ```
 
-#### Notes
-
-- When providing the `preset` parameter, the `base`, `primary`, `feedback`, and `sidebar` parameters will be ignored.
-- The preset must include complete color definitions for both `light` and `dark` modes.
-- It is recommended to start from the structure of built-in presets and modify according to your design needs.
-
 ## 📖 API Documentation
 
 ### `createShadcnTheme(options?: ThemeOptions)`
@@ -207,17 +202,17 @@ theme.getRadiusCss(radius?: string): string
 
 #### ThemeOptions
 
-| Parameter      | Type                           | Default      | Description                                                                             |
-| -------------- | ------------------------------ | ------------ | --------------------------------------------------------------------------------------- |
-| `base`         | `BuiltinBasePresetKey`         | `'neutral'`  | Base preset key                                                                         |
-| `primary`      | `BuiltinPrimaryPresetKey`      | `'indigo'`   | Primary preset key                                                                      |
-| `feedback`     | `BuiltinFeedbackPresetKey`     | `'classic'`  | Feedback preset key                                                                     |
-| `sidebar`      | `'extended'`                   | `'extended'` | Sidebar mode; `extended` derives from base/primary                                      |
-| `preset`       | `ThemeColorPresetItem`         | -            | Complete custom color preset (when provided, base/primary/feedback/sidebar are ignored) |
-| `radius`       | `string`                       | `'0.625rem'` | Global border radius                                                                    |
-| `styleTarget`  | `'html' \| ':root'`            | `':root'`    | CSS variables mount selector                                                            |
-| `darkSelector` | `'class' \| 'media' \| string` | `'class'`    | Dark mode selector (custom string supported)                                            |
-| `format`       | `'hsl' \| 'oklch'`             | `'hsl'`      | Output color format                                                                     |
+| Parameter      | Type                                   | Default      | Description                                        |
+| -------------- | -------------------------------------- | ------------ | -------------------------------------------------- |
+| `base`         | `BuiltinBasePresetKey \| 'custom'`     | `'zinc'`     | Base preset key                                    |
+| `primary`      | `BuiltinPrimaryPresetKey \| 'custom'`  | `'indigo'`   | Primary preset key                                 |
+| `feedback`     | `BuiltinFeedbackPresetKey \| 'custom'` | `'classic'`  | Feedback preset key                                |
+| `sidebar`      | `'extended' \| 'custom'`               | `'extended'` | Sidebar mode; `extended` derives from base/primary |
+| `preset`       | `CustomThemeColorPreset`               | -            | Custom color preset                                |
+| `radius`       | `string`                               | `'0.625rem'` | Global border radius                               |
+| `styleTarget`  | `'html' \| ':root'`                    | `':root'`    | CSS variables mount selector                       |
+| `darkSelector` | `'class' \| 'media' \| string`         | `'class'`    | Dark mode selector (custom string supported)       |
+| `format`       | `'hsl' \| 'oklch'`                     | `'hsl'`      | Output color format                                |
 
 ### Preset Configuration (PresetConfig)
 
@@ -227,11 +222,9 @@ interface PresetConfig {
   primary?: BuiltinPrimaryPresetKey | 'custom';
   feedback?: BuiltinFeedbackPresetKey | 'custom';
   sidebar?: 'extended' | 'custom';
-  preset?: ThemeColorPresetItem;
+  preset?: CustomThemeColorPreset;
 }
 ```
-
-When using the `preset` parameter, other configuration parameters (base/primary/feedback/sidebar) will be ignored.
 
 #### Feedback Palette Key (FeedbackPaletteKey)
 
@@ -303,7 +296,7 @@ Supports configuration of the following color variables:
 
 ### Color Value Format (ColorValue)
 
-Supports three color value formats:
+Supports the following color value formats:
 
 1. **HSL Format**
 
@@ -325,6 +318,16 @@ Supports three color value formats:
 'slate.500';
 'blue.600';
 'red.50';
+```
+
+4. **Built-in color names**
+
+```typescript
+'inherit';
+'currentColor';
+'transparent';
+'black';
+'white';
 ```
 
 ## 🎨 Usage Examples

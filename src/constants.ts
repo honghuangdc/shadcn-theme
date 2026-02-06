@@ -1,13 +1,17 @@
 import { keysOf } from './shared';
 import type {
-  BasePresetItem,
   BuiltinBasePresetKey,
   BuiltinFeedbackPresetKey,
   BuiltinPrimaryPresetKey,
-  DarkSelector,
-  FeedbackPresetItem,
-  PrimaryPresetItem,
+  BasePreset,
+  FeedbackPreset,
+  PrimaryPreset,
   ThemeColorKey,
+  BasePresetColorKey,
+  PrimaryPresetColorKey,
+  FeedbackPresetColorKey,
+  SidebarPresetColorKey,
+  DarkSelector,
   OKLCHColor,
   PresetKeyConfig
 } from './types';
@@ -71,9 +75,10 @@ export const EXTENDED_THEME_VARIABLES = {
 };
 
 export const DEFAULT_PRESET_KEY = {
-  base: 'neutral',
+  base: 'zinc',
   primary: 'indigo',
-  feedback: 'classic'
+  feedback: 'classic',
+  sidebar: 'extended'
 } as const satisfies PresetKeyConfig;
 
 /**
@@ -91,7 +96,7 @@ const DARK_INPUT: OKLCHColor = 'oklch(100% 0 0 / 0.15)';
 /**
  * builtin base color preset
  */
-export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePresetItem> = {
+export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePreset> = {
   stone: {
     light: {
       background: 'white',
@@ -337,7 +342,7 @@ export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePresetItem> = {
 /**
  * builtin primary color preset
  */
-export const builtinPrimaryPreset: Record<BuiltinPrimaryPresetKey, PrimaryPresetItem> = {
+export const builtinPrimaryPreset: Record<BuiltinPrimaryPresetKey, PrimaryPreset> = {
   stone: {
     light: {
       primary: 'stone.800',
@@ -783,7 +788,7 @@ export const builtinPrimaryPreset: Record<BuiltinPrimaryPresetKey, PrimaryPreset
 /**
  * builtin feedback color preset
  */
-export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPresetItem> = {
+export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPreset> = {
   /**
    * Classic standard combination for most scenarios
    * 经典标准 . 最常见的组合，适用于大多数场景
@@ -1061,3 +1066,20 @@ export const builtinBasePresetKeys = keysOf(builtinBasePreset);
 export const builtinPrimaryPresetKeys = keysOf(builtinPrimaryPreset);
 
 export const builtinFeedbackPresetKeys = keysOf(builtinFeedbackPreset);
+
+export const basePresetColorKeys: BasePresetColorKey[] = keysOf(builtinBasePreset['zinc'].light);
+
+export const primaryPresetColorKeys: PrimaryPresetColorKey[] = keysOf(builtinPrimaryPreset['indigo'].light);
+
+export const feedbackPresetColorKeys: FeedbackPresetColorKey[] = keysOf(builtinFeedbackPreset['classic'].light);
+
+export const sidebarPresetColorKeys: SidebarPresetColorKey[] = [
+  'sidebar',
+  'sidebarForeground',
+  'sidebarPrimary',
+  'sidebarPrimaryForeground',
+  'sidebarAccent',
+  'sidebarAccentForeground',
+  'sidebarBorder',
+  'sidebarRing'
+];

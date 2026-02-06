@@ -9,7 +9,7 @@ export function createShadcnTheme(options?: ThemeOptions) {
     base = DEFAULT_PRESET_KEY.base,
     primary = DEFAULT_PRESET_KEY.primary,
     feedback = DEFAULT_PRESET_KEY.feedback,
-    sidebar = 'extended',
+    sidebar = DEFAULT_PRESET_KEY.sidebar,
     preset,
     radius = '0.625rem',
     styleTarget = ':root',

@@ -1,35 +1,89 @@
-import { builtinBasePreset, builtinFeedbackPreset, builtinPrimaryPreset } from './constants';
+import {
+  DEFAULT_PRESET_KEY,
+  builtinBasePreset,
+  builtinFeedbackPreset,
+  builtinPrimaryPreset,
+  basePresetColorKeys,
+  primaryPresetColorKeys,
+  feedbackPresetColorKeys,
+  sidebarPresetColorKeys
+} from './constants';
 import type {
   PresetKeyConfig,
-  ThemeColorPresetItem,
+  ThemeColorPreset,
   CustomPreset,
-  BasePresetItem,
-  PrimaryPresetItem,
-  FeedbackPresetItem,
-  SidebarPresetItem
+  CustomThemeColorPreset,
+  SidebarPreset,
+  SidebarExtendedPreset
 } from './types';
 
-export function generateThemePreset(config: Required<PresetKeyConfig>, customPreset?: ThemeColorPresetItem) {
-  let basePreset: BasePresetItem | undefined;
-  let primaryPreset: PrimaryPresetItem | undefined;
-  let feedbackPreset: FeedbackPresetItem | undefined;
-  let sidebarPreset: SidebarPresetItem | undefined;
+export function generateThemePreset(config: Required<PresetKeyConfig>, customPreset?: CustomThemeColorPreset) {
+  const { base, primary, feedback, sidebar } = config;
 
-  if (customPreset) {
-    const custom = generateCustomPreset(customPreset);
-    basePreset = custom.base;
-    primaryPreset = custom.primary;
-    feedbackPreset = custom.feedback;
-    sidebarPreset = custom.sidebar;
-  } else {
-    const { base, primary, feedback } = config;
-    basePreset = builtinBasePreset[base];
-    primaryPreset = builtinPrimaryPreset[primary];
-    feedbackPreset = builtinFeedbackPreset[feedback];
-    sidebarPreset = generateSidebarPreset(basePreset, primaryPreset);
+  const preset = getBuiltinThemePreset(config);
+
+  if (!customPreset) {
+    return preset;
   }
 
-  const preset: ThemeColorPresetItem = {
+  if (base === 'custom') {
+    basePresetColorKeys.forEach(key => {
+      preset.light[key] = customPreset.light[key] ?? preset.light[key];
+      preset.dark[key] = customPreset.dark?.[key] ?? preset.dark[key];
+    });
+  }
+  if (primary === 'custom') {
+    primaryPresetColorKeys.forEach(key => {
+      preset.light[key] = customPreset.light[key] ?? preset.light[key];
+      preset.dark[key] = customPreset.dark?.[key] ?? preset.dark[key];
+    });
+  }
+  if (feedback === 'custom') {
+    feedbackPresetColorKeys.forEach(key => {
+      preset.light[key] = customPreset.light[key] ?? preset.light[key];
+      preset.dark[key] = customPreset.dark?.[key] ?? preset.dark[key];
+    });
+  }
+  // regenerate sidebar preset
+  const sidebarPreset = generateSidebarPreset(preset);
+  Object.assign(preset.light, sidebarPreset.light);
+  Object.assign(preset.dark, sidebarPreset.dark);
+
+  if (sidebar === 'custom') {
+    sidebarPresetColorKeys.forEach(key => {
+      preset.light[key] = customPreset.light[key] ?? preset.light[key];
+      preset.dark[key] = customPreset.dark?.[key] ?? preset.dark[key];
+    });
+  }
+
+  return preset;
+}
+
+function getBuiltinThemePreset(config: Required<PresetKeyConfig>) {
+  let { base, primary, feedback, sidebar } = config;
+
+  if (base === 'custom') {
+    base = DEFAULT_PRESET_KEY.base;
+  }
+  if (primary === 'custom') {
+    primary = DEFAULT_PRESET_KEY.primary;
+  }
+  if (feedback === 'custom') {
+    feedback = DEFAULT_PRESET_KEY.feedback;
+  }
+  if (sidebar === 'custom') {
+    sidebar = DEFAULT_PRESET_KEY.sidebar;
+  }
+
+  const basePreset = builtinBasePreset[base];
+  const primaryPreset = builtinPrimaryPreset[primary];
+  const feedbackPreset = builtinFeedbackPreset[feedback];
+  const sidebarPreset = generateSidebarPreset({
+    light: { ...basePreset.light, ...primaryPreset.light },
+    dark: { ...basePreset.dark, ...primaryPreset.dark }
+  });
+
+  const preset: ThemeColorPreset = {
     light: {
       ...basePreset.light,
       ...primaryPreset.light,
@@ -50,83 +104,85 @@ export function generateThemePreset(config: Required<PresetKeyConfig>, customPre
 /**
  * generate sidebar color preset from base and theme color preset
  */
-export function generateSidebarPreset(basePreset: BasePresetItem, themePreset: PrimaryPresetItem) {
-  const preset: SidebarPresetItem = {
+function generateSidebarPreset(extendedPreset: SidebarExtendedPreset) {
+  const { light, dark } = extendedPreset;
+
+  const preset: SidebarPreset = {
     light: {
-      sidebar: basePreset.light.background,
-      sidebarForeground: basePreset.light.foreground,
-      sidebarPrimary: themePreset.light.primary,
-      sidebarPrimaryForeground: basePreset.light.primaryForeground,
-      sidebarAccent: basePreset.light.accent,
-      sidebarAccentForeground: basePreset.light.accentForeground,
-      sidebarBorder: basePreset.light.border,
-      sidebarRing: themePreset.light.ring
+      sidebar: light.background,
+      sidebarForeground: light.foreground,
+      sidebarPrimary: light.primary,
+      sidebarPrimaryForeground: light.primaryForeground,
+      sidebarAccent: light.accent,
+      sidebarAccentForeground: light.accentForeground,
+      sidebarBorder: light.border,
+      sidebarRing: light.ring
     },
     dark: {
-      sidebar: basePreset.dark.card,
-      sidebarForeground: basePreset.dark.foreground,
-      sidebarPrimary: themePreset.dark.primary,
-      sidebarPrimaryForeground: basePreset.dark.primaryForeground,
-      sidebarAccent: basePreset.dark.accent,
-      sidebarAccentForeground: basePreset.dark.accentForeground,
-      sidebarBorder: basePreset.dark.border,
-      sidebarRing: themePreset.dark.ring
+      sidebar: dark.card,
+      sidebarForeground: dark.foreground,
+      sidebarPrimary: dark.primary,
+      sidebarPrimaryForeground: dark.primaryForeground,
+      sidebarAccent: dark.accent,
+      sidebarAccentForeground: dark.accentForeground,
+      sidebarBorder: dark.border,
+      sidebarRing: dark.ring
     }
   };
 
   return preset;
 }
 
-export function generateCustomPreset(preset: ThemeColorPresetItem) {
+export function generateCustomPreset(preset: ThemeColorPreset) {
   const { light, dark } = preset;
 
   const classified: CustomPreset = {
     base: {
       light: {
         background: light.background,
-        foreground: light.background,
-        card: light.background,
-        cardForeground: light.background,
-        popover: light.background,
-        popoverForeground: light.background,
-        primaryForeground: light.background,
-        secondary: light.background,
-        secondaryForeground: light.background,
-        muted: light.background,
-        mutedForeground: light.background,
-        accent: light.background,
-        accentForeground: light.background,
-        destructiveForeground: light.background,
-        successForeground: light.background,
-        warningForeground: light.background,
-        infoForeground: light.background,
-        carbon: light.background,
-        carbonForeground: light.background,
-        border: light.background,
-        input: light.background
+        foreground: light.foreground,
+        card: light.card,
+        cardForeground: light.cardForeground,
+        popover: light.popover,
+        popoverForeground: light.popoverForeground,
+        primaryForeground: light.primaryForeground,
+        secondary: light.secondary,
+        secondaryForeground: light.secondaryForeground,
+        muted: light.muted,
+        mutedForeground: light.mutedForeground,
+        accent: light.accent,
+        accentForeground: light.accentForeground,
+        destructiveForeground: light.destructiveForeground,
+        successForeground: light.successForeground,
+        warningForeground: light.warningForeground,
+        infoForeground: light.infoForeground,
+        carbon: light.carbon,
+        carbonForeground: light.carbonForeground,
+        border: light.border,
+        input: light.input
       },
       dark: {
         background: dark.background,
-        foreground: dark.background,
-        card: dark.background,
-        cardForeground: dark.background,
-        popover: dark.background,
-        popoverForeground: dark.background,
-        primaryForeground: dark.background,
-        secondary: dark.background,
-        secondaryForeground: dark.background,
-        muted: dark.background,
-        mutedForeground: dark.background,
-        accent: dark.background,
-        accentForeground: dark.background,
-        destructiveForeground: dark.background,
-        successForeground: dark.background,
-        warningForeground: dark.background,
-        infoForeground: dark.background,
-        carbon: dark.background,
-        carbonForeground: dark.background,
-        border: dark.background,
-        input: dark.background
+        foreground: dark.foreground,
+        card: dark.card,
+        cardForeground: dark.cardForeground,
+        popover: dark.popover,
+        popoverForeground: dark.popoverForeground,
+        primaryForeground: dark.primaryForeground,
+        secondary: dark.secondary,
+        secondaryForeground: dark.secondaryForeground,
+        muted: dark.muted,
+        mutedForeground: dark.mutedForeground,
+        accent: dark.accent,
+        accentForeground: dark.accentForeground,
+        destructiveForeground: dark.destructiveForeground,
+        successForeground: dark.successForeground,
+        warningForeground: dark.warningForeground,
+        infoForeground: dark.infoForeground,
+        carbon: dark.carbon,
+        carbonForeground: dark.carbonForeground,
+        border: dark.border,
+        input: dark.input
       }
     },
     primary: {

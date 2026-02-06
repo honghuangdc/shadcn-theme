@@ -7,14 +7,14 @@ import type {
   DarkSelector,
   StyleTarget,
   ThemeColorKey,
-  ThemeColorPresetItem,
+  ThemeColorPreset,
   ThemeColorWithAlphaKey,
   ThemeColors,
   ThemeOptions
 } from './types';
 
 export function generateCSSVariables(
-  preset: ThemeColorPresetItem,
+  preset: ThemeColorPreset,
   options: Required<Pick<ThemeOptions, 'styleTarget' | 'darkSelector' | 'format'>>
 ) {
   const { light, dark } = preset;

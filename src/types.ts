@@ -197,7 +197,7 @@ export type SidebarExtendedColorKey = Extract<
   | 'ring'
 >;
 
-export type PresetItem<K extends string> = {
+export type Preset<K extends string> = {
   light: {
     [key in K]: ColorValue;
   };
@@ -206,11 +206,16 @@ export type PresetItem<K extends string> = {
   };
 };
 
-export type BasePresetItem = PresetItem<BasePresetColorKey>;
-export type PrimaryPresetItem = PresetItem<PrimaryPresetColorKey>;
-export type FeedbackPresetItem = PresetItem<FeedbackPresetColorKey>;
-export type SidebarPresetItem = PresetItem<SidebarPresetColorKey>;
-export type ThemeColorPresetItem = PresetItem<ThemeColorKey>;
+export type BasePreset = Preset<BasePresetColorKey>;
+export type PrimaryPreset = Preset<PrimaryPresetColorKey>;
+export type FeedbackPreset = Preset<FeedbackPresetColorKey>;
+export type SidebarPreset = Preset<SidebarPresetColorKey>;
+export type SidebarExtendedPreset = Preset<SidebarExtendedColorKey>;
+export type ThemeColorPreset = Preset<ThemeColorKey>;
+export type CustomThemeColorPreset = {
+  light: Partial<ThemeColors>;
+  dark?: Partial<ThemeColors>;
+};
 
 export type StyleTarget = 'html' | ':root';
 
@@ -219,10 +224,10 @@ export type DarkSelector = 'class' | 'media';
 export type ColorFormat = 'hsl' | 'oklch';
 
 export interface CustomPreset {
-  base: BasePresetItem;
-  primary: PrimaryPresetItem;
-  feedback: FeedbackPresetItem;
-  sidebar: SidebarPresetItem;
+  base: BasePreset;
+  primary: PrimaryPreset;
+  feedback: FeedbackPreset;
+  sidebar: SidebarPreset;
 }
 
 /**
@@ -232,36 +237,36 @@ export interface PresetKeyConfig {
   /**
    * the base color key
    *
-   * @default 'neutral'
+   * @default 'zinc'
    */
-  base?: BuiltinBasePresetKey;
+  base?: BuiltinBasePresetKey | 'custom';
   /**
    * the primary color key
    *
    * @default 'indigo'
    */
-  primary?: BuiltinPrimaryPresetKey;
+  primary?: BuiltinPrimaryPresetKey | 'custom';
   /**
    * the feedback color key
    *
    * @default 'classic'
    */
-  feedback?: BuiltinFeedbackPresetKey;
+  feedback?: BuiltinFeedbackPresetKey | 'custom';
   /**
    * the sidebar style key
    *
    * @default 'extended'
    */
-  sidebar?: BuiltinSidebarPresetKey;
+  sidebar?: BuiltinSidebarPresetKey | 'custom';
 }
 
 export interface PresetConfig extends PresetKeyConfig {
   /**
    * custom preset colors
    *
-   * @description if use custom preset, need to provide all colors in the preset
+   * @description only used when preset is provided and one of the preset keys is 'custom'
    */
-  preset?: ThemeColorPresetItem;
+  preset?: CustomThemeColorPreset;
 }
 
 /**

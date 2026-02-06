@@ -69,12 +69,12 @@ applyTheme(theme.getCss({ primary: 'emerald' }));
 
 ### 自定义预设
 
-通过 `preset` 参数，你可以使用完整的自定义颜色配置，覆盖内置的 base/primary/feedback/sidebar 预设。当使用自定义预设时，需要同时提供完整的颜色定义。
+通过 `preset` 参数，你可以使用自定义颜色配置，覆盖内置的 base/primary/feedback/sidebar 预设。
 
 #### 1) 何时使用自定义预设
 
-- 当内置预设组合无法满足设计需求时，可以使用 `preset` 传入完整的自定义颜色配置。
-- 使用自定义预设时，所有 base/primary/feedback/sidebar 相关的参数将被忽略，仅使用 `preset` 中的配置。
+- 当内置预设组合无法满足设计需求时，可以使用 `preset` 传入自定义颜色配置。
+- 使用自定义预设时，可以通过 base/primary/feedback/sidebar 设置`custom`来应用自定义预设。
 
 #### 2) 颜色值与 `format`
 
@@ -185,12 +185,6 @@ const theme = createShadcnTheme({
 const css = theme.getCss();
 ```
 
-#### 注意事项
-
-- 当提供 `preset` 参数时，`base`、`primary`、`feedback`、`sidebar` 参数将被忽略。
-- 预设必须包含 `light` 和 `dark` 两个模式的完整色值定义。
-- 建议从内置预设的结构开始，根据设计需求进行修改。
-
 ## 📖 API 文档
 
 ### `createShadcnTheme(options?: ThemeOptions)`
@@ -209,17 +203,17 @@ theme.getRadiusCss(radius?: string): string
 
 #### ThemeOptions
 
-| 参数           | 类型                           | 默认值       | 描述                                                             |
-| -------------- | ------------------------------ | ------------ | ---------------------------------------------------------------- |
-| `base`         | `BuiltinBasePresetKey`         | `'neutral'`  | base 预设 key                                                    |
-| `primary`      | `BuiltinPrimaryPresetKey`      | `'indigo'`   | primary 预设 key                                                 |
-| `feedback`     | `BuiltinFeedbackPresetKey`     | `'classic'`  | feedback 预设 key                                                |
-| `sidebar`      | `'extended'`                   | `'extended'` | 侧边栏模式；`extended` 表示由 base/primary 自动派生              |
-| `preset`       | `ThemeColorPresetItem`         | -            | 自定义完整颜色预设（提供时将忽略 base/primary/feedback/sidebar） |
-| `radius`       | `string`                       | `'0.625rem'` | 全局圆角                                                         |
-| `styleTarget`  | `'html' \| ':root'`            | `':root'`    | CSS 变量挂载目标选择器                                           |
-| `darkSelector` | `'class' \| 'media' \| string` | `'class'`    | 深色模式选择器（支持自定义字符串）                               |
-| `format`       | `'hsl' \| 'oklch'`             | `'hsl'`      | 颜色输出格式                                                     |
+| 参数           | 类型                                   | 默认值       | 描述                                                |
+| -------------- | -------------------------------------- | ------------ | --------------------------------------------------- |
+| `base`         | `BuiltinBasePresetKey \| 'custom'`     | `'zinc'`     | base 预设 key                                       |
+| `primary`      | `BuiltinPrimaryPresetKey \| 'custom'`  | `'indigo'`   | primary 预设 key                                    |
+| `feedback`     | `BuiltinFeedbackPresetKey \| 'custom'` | `'classic'`  | feedback 预设 key                                   |
+| `sidebar`      | `'extended' \| 'custom'`               | `'extended'` | 侧边栏模式；`extended` 表示由 base/primary 自动派生 |
+| `preset`       | `CustomThemeColorPreset`               | -            | 自定义颜色预设                                      |
+| `radius`       | `string`                               | `'0.625rem'` | 全局圆角                                            |
+| `styleTarget`  | `'html' \| ':root'`                    | `':root'`    | CSS 变量挂载目标选择器                              |
+| `darkSelector` | `'class' \| 'media' \| string`         | `'class'`    | 深色模式选择器（支持自定义字符串）                  |
+| `format`       | `'hsl' \| 'oklch'`                     | `'hsl'`      | 颜色输出格式                                        |
 
 ### 预设配置（PresetConfig）
 
@@ -229,11 +223,9 @@ interface PresetConfig {
   primary?: BuiltinPrimaryPresetKey | 'custom';
   feedback?: BuiltinFeedbackPresetKey | 'custom';
   sidebar?: 'extended' | 'custom';
-  preset?: ThemeColorPresetItem;
+  preset?: CustomThemeColorPreset;
 }
 ```
-
-当使用 `preset` 参数时，其他配置参数（base/primary/feedback/sidebar）将被忽略。
 
 #### 反馈色风格（FeedbackPaletteKey）
 
@@ -305,7 +297,7 @@ interface PresetConfig {
 
 ### 颜色值格式（ColorValue）
 
-支持三种颜色值格式：
+支持以下几种颜色值格式：
 
 1. **HSL 格式**
 
@@ -327,6 +319,16 @@ interface PresetConfig {
 'slate.500';
 'blue.600';
 'red.50';
+```
+
+4. **内置颜色名称**
+
+```typescript
+'inherit';
+'currentColor';
+'transparent';
+'black';
+'white';
 ```
 
 ## 🎨 使用示例
