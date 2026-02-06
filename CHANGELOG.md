@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.3.0](https://github.com/soybeanjs/shadcn-theme/compare/v0.2.2...v0.3.0) (2026-02-07)
+
+### &nbsp;&nbsp;&nbsp;🛠 Optimizations
+
+- **preset**: optimize custom preset to support partial preset &nbsp;-&nbsp; by @soybeanjs [<samp>(4344a)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/4344a08)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
+
 ## [v0.2.2](https://github.com/soybeanjs/shadcn-theme/compare/v0.2.1...v0.2.2) (2026-02-07)
 
 ### &nbsp;&nbsp;&nbsp;🐞 Bug Fixes
