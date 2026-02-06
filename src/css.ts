@@ -28,16 +28,18 @@ export function generateCSSVariables(
     darkCss += getItemColorCSSVariables(key, format, dark);
   });
 
-  const paletteCss = generateCSSVariablesPalette(light, format);
+  const lightPaletteCss = generateCSSVariablesPalette(light, format);
 
-  let css = `${styleTarget} {\n${lightCss}\n${paletteCss}\n}`;
+  let css = `${styleTarget} {\n${lightCss}\n${lightPaletteCss}\n}`;
 
   let darkSelector = options.darkSelector;
   if (darkSelector === 'class' || darkSelector === 'media') {
     darkSelector = DARK_SELECTOR[darkSelector as DarkSelector];
   }
 
-  css += `\n\n${darkSelector} {\n${darkCss}\n}`;
+  const darkPaletteCss = generateCSSVariablesPalette(dark, format);
+
+  css += `\n\n${darkSelector} {\n${darkCss}\n${darkPaletteCss}\n}`;
 
   return css;
 }
