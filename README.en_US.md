@@ -67,61 +67,115 @@ applyTheme(theme.getCss({ primary: 'emerald' }));
 
 ### Custom Preset
 
-`preset` lets you add or override named preset entries on top of the built-in presets. You can extend only one group (e.g. add a custom `primary` preset), or extend `base / primary / feedback / sidebar` together.
+Using the `preset` parameter, you can provide a complete custom color configuration that overrides the built-in base/primary/feedback/sidebar presets. When using a custom preset, you need to provide complete color definitions.
 
-#### 1) Structure and how to reference a preset
+#### 1) When to use custom preset
 
-- `preset` is an object that may contain `base / primary / feedback / sidebar`. Each group is `{ [key: string]: PresetItem }`.
-- To use your custom preset, set the corresponding `base` / `primary` / `feedback` / `sidebar` option to the key you defined.
-- Example: if you define `preset.primary.brandPrimary`, then pass `primary: 'brandPrimary'`.
+- Use `preset` to provide a complete custom color configuration when built-in preset combinations cannot meet your design requirements.
+- When using a custom preset, all base/primary/feedback/sidebar related parameters will be ignored, only the `preset` configuration is used.
 
-#### 2) Merge/override rules
+#### 2) Color values and `format`
 
-The library shallow-merges your `preset` into the built-ins:
-
-- Same key is overridden by your `preset` (e.g. defining `primary.indigo` overrides built-in `indigo`).
-- New keys are added as extra presets (e.g. `primary.brandPrimary`).
-
-#### 3) Two sidebar modes
-
-- `sidebar: 'extended'` (default): ignores `preset.sidebar` and derives sidebar colors from base/primary.
-- `sidebar: '<yourKey>'`: uses `preset.sidebar[<yourKey>]` as the sidebar colors.
-
-#### 4) Color values and `format`
-
-- Each color value supports: Tailwind palette reference (e.g. `slate.500`), `hsl(...)`, or `oklch(...)`.
+- Each color value supports: Tailwind palette reference (e.g. `slate.500`), `hsl(...)`, `oklch(...)`, or the builtin permitted color names (`inherit`, `currentColor`, `transparent`, `black`, `white`).
 - `format: 'hsl'`: outputs `h s l [/ alpha]` (no outer `hsl(...)`); `oklch(...)` inputs are converted to HSL.
 - `format: 'oklch'`: outputs values with the outer `oklch(...)`; `hsl(...)` inputs are converted to OKLCH.
 
-#### Quick example: add a custom primary preset (good starting point)
+#### Quick example: Complete custom preset
 
-`primary` presets only need `primary / ring / chart1~chart5`:
-
-```ts
+```typescript
 const theme = createShadcnTheme({
-  primary: 'brandPrimary',
   preset: {
-    primary: {
-      brandPrimary: {
-        light: {
-          primary: 'blue.600',
-          ring: 'blue.400',
-          chart1: 'orange.600',
-          chart2: 'teal.600',
-          chart3: 'cyan.900',
-          chart4: 'amber.400',
-          chart5: 'amber.500'
-        },
-        dark: {
-          primary: 'blue.400',
-          ring: 'blue.500',
-          chart1: 'orange.500',
-          chart2: 'teal.500',
-          chart3: 'cyan.400',
-          chart4: 'amber.500',
-          chart5: 'amber.600'
-        }
-      }
+    light: {
+      // Base colors
+      background: 'white',
+      foreground: 'slate.950',
+      card: 'white',
+      cardForeground: 'slate.950',
+      popover: 'white',
+      popoverForeground: 'slate.950',
+      primaryForeground: 'slate.50',
+      secondary: 'slate.100',
+      secondaryForeground: 'slate.900',
+      muted: 'slate.100',
+      mutedForeground: 'slate.500',
+      accent: 'slate.100',
+      accentForeground: 'slate.900',
+      destructiveForeground: 'slate.50',
+      successForeground: 'slate.50',
+      warningForeground: 'slate.50',
+      infoForeground: 'slate.50',
+      carbon: 'slate.800',
+      carbonForeground: 'slate.50',
+      border: 'slate.200',
+      input: 'slate.200',
+      // Theme colors
+      primary: 'blue.600',
+      destructive: 'red.500',
+      success: 'green.500',
+      warning: 'amber.500',
+      info: 'blue.500',
+      ring: 'blue.400',
+      // Chart colors
+      chart1: 'orange.600',
+      chart2: 'teal.600',
+      chart3: 'cyan.900',
+      chart4: 'amber.400',
+      chart5: 'amber.500',
+      // Sidebar colors
+      sidebar: 'slate.50',
+      sidebarForeground: 'slate.900',
+      sidebarPrimary: 'blue.600',
+      sidebarPrimaryForeground: 'slate.50',
+      sidebarAccent: 'slate.100',
+      sidebarAccentForeground: 'slate.900',
+      sidebarBorder: 'slate.200',
+      sidebarRing: 'blue.400'
+    },
+    dark: {
+      // Base colors
+      background: 'slate.950',
+      foreground: 'slate.50',
+      card: 'slate.900',
+      cardForeground: 'slate.50',
+      popover: 'slate.900',
+      popoverForeground: 'slate.50',
+      primaryForeground: 'slate.900',
+      secondary: 'slate.800',
+      secondaryForeground: 'slate.50',
+      muted: 'slate.800',
+      mutedForeground: 'slate.400',
+      accent: 'slate.800',
+      accentForeground: 'slate.50',
+      destructiveForeground: 'slate.900',
+      successForeground: 'slate.900',
+      warningForeground: 'slate.900',
+      infoForeground: 'slate.900',
+      carbon: 'slate.100',
+      carbonForeground: 'slate.900',
+      border: 'oklch(100% 0 0 / 0.1)',
+      input: 'oklch(100% 0 0 / 0.15)',
+      // Theme colors
+      primary: 'blue.400',
+      destructive: 'red.400',
+      success: 'green.400',
+      warning: 'amber.400',
+      info: 'blue.400',
+      ring: 'blue.500',
+      // Chart colors
+      chart1: 'orange.500',
+      chart2: 'teal.500',
+      chart3: 'cyan.400',
+      chart4: 'amber.500',
+      chart5: 'amber.600',
+      // Sidebar colors
+      sidebar: 'slate.950',
+      sidebarForeground: 'slate.50',
+      sidebarPrimary: 'blue.400',
+      sidebarPrimaryForeground: 'slate.950',
+      sidebarAccent: 'slate.900',
+      sidebarAccentForeground: 'slate.50',
+      sidebarBorder: 'slate.800',
+      sidebarRing: 'blue.500'
     }
   }
 });
@@ -129,127 +183,11 @@ const theme = createShadcnTheme({
 const css = theme.getCss();
 ```
 
-#### Quick example: add a custom feedback preset
+#### Notes
 
-```ts
-const theme = createShadcnTheme({
-  feedback: 'brandFeedback',
-  preset: {
-    feedback: {
-      brandFeedback: {
-        light: {
-          destructive: 'red.500',
-          success: 'emerald.500',
-          warning: 'amber.500',
-          info: 'sky.500'
-        },
-        dark: {
-          destructive: 'red.400',
-          success: 'emerald.400',
-          warning: 'amber.400',
-          info: 'sky.400'
-        }
-      }
-    }
-  }
-});
-```
-
-#### Quick example: custom sidebar (non-extended)
-
-```ts
-const theme = createShadcnTheme({
-  sidebar: 'brandSidebar',
-  preset: {
-    sidebar: {
-      brandSidebar: {
-        light: {
-          sidebar: 'slate.50',
-          sidebarForeground: 'slate.900',
-          sidebarPrimary: 'blue.600',
-          sidebarPrimaryForeground: 'slate.50',
-          sidebarAccent: 'slate.100',
-          sidebarAccentForeground: 'slate.900',
-          sidebarBorder: 'slate.200',
-          sidebarRing: 'blue.400'
-        },
-        dark: {
-          sidebar: 'slate.950',
-          sidebarForeground: 'slate.50',
-          sidebarPrimary: 'blue.400',
-          sidebarPrimaryForeground: 'slate.950',
-          sidebarAccent: 'slate.900',
-          sidebarAccentForeground: 'slate.50',
-          sidebarBorder: 'slate.800',
-          sidebarRing: 'blue.500'
-        }
-      }
-    }
-  }
-});
-```
-
-#### Full example (custom base + primary + feedback)
-
-```typescript
-createShadcnTheme({
-  base: 'demoBase',
-  primary: 'demoPrimary',
-  feedback: 'demoFeedback',
-  preset: {
-    base: {
-      demoBase: {
-        light: {
-          background: 'oklch(100% 0 0)',
-          foreground: 'stone.950',
-          card: 'oklch(100% 0 0)',
-          cardForeground: 'stone.950',
-          popover: 'oklch(100% 0 0)',
-          popoverForeground: 'stone.950',
-          primaryForeground: 'stone.50',
-          secondary: 'stone.100',
-          secondaryForeground: 'stone.900',
-          muted: 'stone.100',
-          mutedForeground: 'stone.500',
-          accent: 'stone.100',
-          accentForeground: 'stone.900',
-          destructiveForeground: 'stone.50',
-          successForeground: 'stone.50',
-          warningForeground: 'stone.50',
-          infoForeground: 'stone.50',
-          carbon: 'stone.800',
-          carbonForeground: 'stone.50',
-          border: 'stone.200',
-          input: 'stone.200'
-        },
-        dark: {
-          background: 'stone.950',
-          foreground: 'stone.50',
-          card: 'stone.900',
-          cardForeground: 'stone.50',
-          popover: 'stone.900',
-          popoverForeground: 'stone.50',
-          primaryForeground: 'stone.900',
-          secondary: 'stone.800',
-          secondaryForeground: 'stone.50',
-          muted: 'stone.800',
-          mutedForeground: 'stone.400',
-          accent: 'stone.800',
-          accentForeground: 'stone.50',
-          destructiveForeground: 'stone.900',
-          successForeground: 'stone.900',
-          warningForeground: 'stone.900',
-          infoForeground: 'stone.900',
-          carbon: 'stone.100',
-          carbonForeground: 'stone.900',
-          border: 'oklch(100% 0 0 / 0.1)',
-          input: 'oklch(100% 0 0 / 0.15)'
-        }
-      }
-    }
-  }
-});
-```
+- When providing the `preset` parameter, the `base`, `primary`, `feedback`, and `sidebar` parameters will be ignored.
+- The preset must include complete color definitions for both `light` and `dark` modes.
+- It is recommended to start from the structure of built-in presets and modify according to your design needs.
 
 ## 📖 API Documentation
 
@@ -269,28 +207,31 @@ theme.getRadiusCss(radius?: string): string
 
 #### ThemeOptions
 
-| Parameter      | Type                                 | Default      | Description                                                      |
-| -------------- | ------------------------------------ | ------------ | ---------------------------------------------------------------- |
-| `base`         | `BuiltinBasePresetKey \| string`     | `'gray'`     | Base preset key                                                  |
-| `primary`      | `BuiltinPrimaryPresetKey \| string`  | `'indigo'`   | Primary preset key                                               |
-| `feedback`     | `BuiltinFeedbackPresetKey \| string` | `'classic'`  | Feedback preset key                                              |
-| `sidebar`      | `'extended' \| string`               | `'extended'` | Sidebar mode; `extended` derives from base/primary               |
-| `preset`       | `CustomPreset`                       | -            | Custom preset collection (extends base/primary/feedback/sidebar) |
-| `radius`       | `string`                             | `'0.625rem'` | Global border radius                                             |
-| `styleTarget`  | `'html' \| ':root'`                  | `':root'`    | CSS variables mount selector                                     |
-| `darkSelector` | `'class' \| 'media' \| string`       | `'class'`    | Dark mode selector (custom string supported)                     |
-| `format`       | `'hsl' \| 'oklch'`                   | `'hsl'`      | Output color format                                              |
+| Parameter      | Type                           | Default      | Description                                                                             |
+| -------------- | ------------------------------ | ------------ | --------------------------------------------------------------------------------------- |
+| `base`         | `BuiltinBasePresetKey`         | `'neutral'`  | Base preset key                                                                         |
+| `primary`      | `BuiltinPrimaryPresetKey`      | `'indigo'`   | Primary preset key                                                                      |
+| `feedback`     | `BuiltinFeedbackPresetKey`     | `'classic'`  | Feedback preset key                                                                     |
+| `sidebar`      | `'extended'`                   | `'extended'` | Sidebar mode; `extended` derives from base/primary                                      |
+| `preset`       | `ThemeColorPresetItem`         | -            | Complete custom color preset (when provided, base/primary/feedback/sidebar are ignored) |
+| `radius`       | `string`                       | `'0.625rem'` | Global border radius                                                                    |
+| `styleTarget`  | `'html' \| ':root'`            | `':root'`    | CSS variables mount selector                                                            |
+| `darkSelector` | `'class' \| 'media' \| string` | `'class'`    | Dark mode selector (custom string supported)                                            |
+| `format`       | `'hsl' \| 'oklch'`             | `'hsl'`      | Output color format                                                                     |
 
 ### Preset Configuration (PresetConfig)
 
 ```typescript
 interface PresetConfig {
-  base?: string;
-  primary?: string;
-  feedback?: string;
-  sidebar?: 'extended' | string;
+  base?: BuiltinBasePresetKey | 'custom';
+  primary?: BuiltinPrimaryPresetKey | 'custom';
+  feedback?: BuiltinFeedbackPresetKey | 'custom';
+  sidebar?: 'extended' | 'custom';
+  preset?: ThemeColorPresetItem;
 }
 ```
+
+When using the `preset` parameter, other configuration parameters (base/primary/feedback/sidebar) will be ignored.
 
 #### Feedback Palette Key (FeedbackPaletteKey)
 

@@ -69,62 +69,115 @@ applyTheme(theme.getCss({ primary: 'emerald' }));
 
 ### 自定义预设
 
-`preset` 用于在内置预设的基础上“新增/覆盖”一组命名的配色方案。你可以只扩展某一类（例如只加一个 `primary` 预设），也可以同时扩展 `base / primary / feedback / sidebar`。
+通过 `preset` 参数，你可以使用完整的自定义颜色配置，覆盖内置的 base/primary/feedback/sidebar 预设。当使用自定义预设时，需要同时提供完整的颜色定义。
 
-#### 1) 预设结构与如何引用
+#### 1) 何时使用自定义预设
 
-- `preset` 是一个对象，下面可包含 `base / primary / feedback / sidebar` 四个分组；每个分组都是 `{ [key: string]: PresetItem }`。
-- 想使用你新增的预设，只需要把对应的 `base` / `primary` / `feedback` / `sidebar` 设为你定义的 key。
-- 例：你在 `preset.primary` 里定义了 `brandPrimary`，那么传入 `primary: 'brandPrimary'` 就会选中它。
+- 当内置预设组合无法满足设计需求时，可以使用 `preset` 传入完整的自定义颜色配置。
+- 使用自定义预设时，所有 base/primary/feedback/sidebar 相关的参数将被忽略，仅使用 `preset` 中的配置。
 
-#### 2) 合并/覆盖规则
+#### 2) 颜色值与 `format`
 
-本库会把你的 `preset` 与内置预设做浅合并：
-
-- 同名 key 会被你的 `preset` 覆盖（例如你定义了 `primary.indigo`，会覆盖内置的 `indigo`）
-- 不同名 key 会作为新增预设加入（例如新增 `primary.brandPrimary`）
-
-#### 3) sidebar 的两个模式
-
-- `sidebar: 'extended'`（默认）：不会读取 `preset.sidebar`，而是由 base/primary 的结果自动派生一套 sidebar 颜色。
-- `sidebar: '<yourKey>'`：会读取 `preset.sidebar[<yourKey>]` 作为 sidebar 配色。
-
-#### 4) 颜色值与 `format`
-
-- 预设里每个颜色值都支持三种写法：Tailwind 色板引用（如 `slate.500`）、`hsl(...)`、`oklch(...)`。
+- 预设里每个颜色值都支持三种写法：Tailwind 色板引用（如 `slate.500`）、`hsl(...)`、`oklch(...)`、或内置允许的颜色名称（`inherit`、`currentColor`、`transparent`、`black`、`white`）。
 - `format: 'hsl'`：输出变量值为 `h s l [/ alpha]`（不含 `hsl(...)` 外层）；如果输入是 `oklch(...)` 会转换为 hsl。
 - `format: 'oklch'`：输出变量值包含 `oklch(...)` 外层；如果输入是 `hsl(...)` 会转换为 oklch。
 
-#### 快速示例：只新增一个 primary 预设（推荐从小块开始）
+#### 快速示例：完整的自定义预设
 
-`primary` 预设只需要覆盖 `primary / ring / chart1~chart5`，字段相对最少：
-
-```ts
+```typescript
 const theme = createShadcnTheme({
-  // 使用你新增的 primary key
-  primary: 'brandPrimary',
   preset: {
-    primary: {
-      brandPrimary: {
-        light: {
-          primary: 'blue.600',
-          ring: 'blue.400',
-          chart1: 'orange.600',
-          chart2: 'teal.600',
-          chart3: 'cyan.900',
-          chart4: 'amber.400',
-          chart5: 'amber.500'
-        },
-        dark: {
-          primary: 'blue.400',
-          ring: 'blue.500',
-          chart1: 'orange.500',
-          chart2: 'teal.500',
-          chart3: 'cyan.400',
-          chart4: 'amber.500',
-          chart5: 'amber.600'
-        }
-      }
+    light: {
+      // 基础颜色
+      background: 'white',
+      foreground: 'slate.950',
+      card: 'white',
+      cardForeground: 'slate.950',
+      popover: 'white',
+      popoverForeground: 'slate.950',
+      primaryForeground: 'slate.50',
+      secondary: 'slate.100',
+      secondaryForeground: 'slate.900',
+      muted: 'slate.100',
+      mutedForeground: 'slate.500',
+      accent: 'slate.100',
+      accentForeground: 'slate.900',
+      destructiveForeground: 'slate.50',
+      successForeground: 'slate.50',
+      warningForeground: 'slate.50',
+      infoForeground: 'slate.50',
+      carbon: 'slate.800',
+      carbonForeground: 'slate.50',
+      border: 'slate.200',
+      input: 'slate.200',
+      // 主题颜色
+      primary: 'blue.600',
+      destructive: 'red.500',
+      success: 'green.500',
+      warning: 'amber.500',
+      info: 'blue.500',
+      ring: 'blue.400',
+      // 图表颜色
+      chart1: 'orange.600',
+      chart2: 'teal.600',
+      chart3: 'cyan.900',
+      chart4: 'amber.400',
+      chart5: 'amber.500',
+      // 侧边栏颜色
+      sidebar: 'slate.50',
+      sidebarForeground: 'slate.900',
+      sidebarPrimary: 'blue.600',
+      sidebarPrimaryForeground: 'slate.50',
+      sidebarAccent: 'slate.100',
+      sidebarAccentForeground: 'slate.900',
+      sidebarBorder: 'slate.200',
+      sidebarRing: 'blue.400'
+    },
+    dark: {
+      // 基础颜色
+      background: 'slate.950',
+      foreground: 'slate.50',
+      card: 'slate.900',
+      cardForeground: 'slate.50',
+      popover: 'slate.900',
+      popoverForeground: 'slate.50',
+      primaryForeground: 'slate.900',
+      secondary: 'slate.800',
+      secondaryForeground: 'slate.50',
+      muted: 'slate.800',
+      mutedForeground: 'slate.400',
+      accent: 'slate.800',
+      accentForeground: 'slate.50',
+      destructiveForeground: 'slate.900',
+      successForeground: 'slate.900',
+      warningForeground: 'slate.900',
+      infoForeground: 'slate.900',
+      carbon: 'slate.100',
+      carbonForeground: 'slate.900',
+      border: 'oklch(100% 0 0 / 0.1)',
+      input: 'oklch(100% 0 0 / 0.15)',
+      // 主题颜色
+      primary: 'blue.400',
+      destructive: 'red.400',
+      success: 'green.400',
+      warning: 'amber.400',
+      info: 'blue.400',
+      ring: 'blue.500',
+      // 图表颜色
+      chart1: 'orange.500',
+      chart2: 'teal.500',
+      chart3: 'cyan.400',
+      chart4: 'amber.500',
+      chart5: 'amber.600',
+      // 侧边栏颜色
+      sidebar: 'slate.950',
+      sidebarForeground: 'slate.50',
+      sidebarPrimary: 'blue.400',
+      sidebarPrimaryForeground: 'slate.950',
+      sidebarAccent: 'slate.900',
+      sidebarAccentForeground: 'slate.50',
+      sidebarBorder: 'slate.800',
+      sidebarRing: 'blue.500'
     }
   }
 });
@@ -132,165 +185,11 @@ const theme = createShadcnTheme({
 const css = theme.getCss();
 ```
 
-#### 快速示例：新增一个 feedback 预设
+#### 注意事项
 
-```ts
-const theme = createShadcnTheme({
-  feedback: 'brandFeedback',
-  preset: {
-    feedback: {
-      brandFeedback: {
-        light: {
-          destructive: 'red.500',
-          success: 'emerald.500',
-          warning: 'amber.500',
-          info: 'sky.500'
-        },
-        dark: {
-          destructive: 'red.400',
-          success: 'emerald.400',
-          warning: 'amber.400',
-          info: 'sky.400'
-        }
-      }
-    }
-  }
-});
-```
-
-#### 快速示例：使用自定义 sidebar（非 extended）
-
-```ts
-const theme = createShadcnTheme({
-  sidebar: 'brandSidebar',
-  preset: {
-    sidebar: {
-      brandSidebar: {
-        light: {
-          sidebar: 'slate.50',
-          sidebarForeground: 'slate.900',
-          sidebarPrimary: 'blue.600',
-          sidebarPrimaryForeground: 'slate.50',
-          sidebarAccent: 'slate.100',
-          sidebarAccentForeground: 'slate.900',
-          sidebarBorder: 'slate.200',
-          sidebarRing: 'blue.400'
-        },
-        dark: {
-          sidebar: 'slate.950',
-          sidebarForeground: 'slate.50',
-          sidebarPrimary: 'blue.400',
-          sidebarPrimaryForeground: 'slate.950',
-          sidebarAccent: 'slate.900',
-          sidebarAccentForeground: 'slate.50',
-          sidebarBorder: 'slate.800',
-          sidebarRing: 'blue.500'
-        }
-      }
-    }
-  }
-});
-```
-
-#### 完整示例（自定义 base + primary + feedback）
-
-```typescript
-createShadcnTheme({
-  base: 'demoBase',
-  primary: 'demoPrimary',
-  feedback: 'demoFeedback',
-  preset: {
-    base: {
-      demoBase: {
-        light: {
-          background: 'oklch(100% 0 0)',
-          foreground: 'stone.950',
-          card: 'oklch(100% 0 0)',
-          cardForeground: 'stone.950',
-          popover: 'oklch(100% 0 0)',
-          popoverForeground: 'stone.950',
-          primaryForeground: 'stone.50',
-          secondary: 'stone.100',
-          secondaryForeground: 'stone.900',
-          muted: 'stone.100',
-          mutedForeground: 'stone.500',
-          accent: 'stone.100',
-          accentForeground: 'stone.900',
-          destructiveForeground: 'stone.50',
-          successForeground: 'stone.50',
-          warningForeground: 'stone.50',
-          infoForeground: 'stone.50',
-          carbon: 'stone.800',
-          carbonForeground: 'stone.50',
-          border: 'stone.200',
-          input: 'stone.200'
-        },
-        dark: {
-          background: 'stone.950',
-          foreground: 'stone.50',
-          card: 'stone.900',
-          cardForeground: 'stone.50',
-          popover: 'stone.900',
-          popoverForeground: 'stone.50',
-          primaryForeground: 'stone.900',
-          secondary: 'stone.800',
-          secondaryForeground: 'stone.50',
-          muted: 'stone.800',
-          mutedForeground: 'stone.400',
-          accent: 'stone.800',
-          accentForeground: 'stone.50',
-          destructiveForeground: 'stone.900',
-          successForeground: 'stone.900',
-          warningForeground: 'stone.900',
-          infoForeground: 'stone.900',
-          carbon: 'stone.100',
-          carbonForeground: 'stone.900',
-          border: 'oklch(100% 0 0 / 0.1)',
-          input: 'oklch(100% 0 0 / 0.15)'
-        }
-      }
-    },
-    primary: {
-      demoPrimary: {
-        light: {
-          primary: 'stone.800',
-          ring: 'stone.400',
-          chart1: 'orange.600',
-          chart2: 'teal.600',
-          chart3: 'cyan.900',
-          chart4: 'amber.400',
-          chart5: 'amber.500'
-        },
-        dark: {
-          primary: 'stone.200',
-          ring: 'stone.500',
-          chart1: 'blue.700',
-          chart2: 'emerald.500',
-          chart3: 'amber.500',
-          chart4: 'purple.500',
-          chart5: 'rose.500'
-        }
-      }
-    },
-    feedback: {
-      demoFeedback: {
-        light: {
-          destructive: 'red.500',
-          success: 'green.500',
-          warning: 'yellow.500',
-          info: 'blue.500'
-        },
-        dark: {
-          destructive: 'red.400',
-          success: 'green.400',
-          warning: 'yellow.400',
-          info: 'blue.400'
-        }
-      }
-    }
-  }
-});
-```
+- 当提供 `preset` 参数时，`base`、`primary`、`feedback`、`sidebar` 参数将被忽略。
+- 预设必须包含 `light` 和 `dark` 两个模式的完整色值定义。
+- 建议从内置预设的结构开始，根据设计需求进行修改。
 
 ## 📖 API 文档
 
@@ -310,28 +209,31 @@ theme.getRadiusCss(radius?: string): string
 
 #### ThemeOptions
 
-| 参数           | 类型                                 | 默认值       | 描述                                                   |
-| -------------- | ------------------------------------ | ------------ | ------------------------------------------------------ |
-| `base`         | `BuiltinBasePresetKey \| string`     | `'gray'`     | base 预设 key                                          |
-| `primary`      | `BuiltinPrimaryPresetKey \| string`  | `'indigo'`   | primary 预设 key                                       |
-| `feedback`     | `BuiltinFeedbackPresetKey \| string` | `'classic'`  | feedback 预设 key                                      |
-| `sidebar`      | `'extended' \| string`               | `'extended'` | 侧边栏模式；`extended` 表示由 base/primary 自动派生    |
-| `preset`       | `CustomPreset`                       | -            | 自定义预设集合（可扩展 base/primary/feedback/sidebar） |
-| `radius`       | `string`                             | `'0.625rem'` | 全局圆角                                               |
-| `styleTarget`  | `'html' \| ':root'`                  | `':root'`    | CSS 变量挂载目标选择器                                 |
-| `darkSelector` | `'class' \| 'media' \| string`       | `'class'`    | 深色模式选择器（支持自定义字符串）                     |
-| `format`       | `'hsl' \| 'oklch'`                   | `'hsl'`      | 颜色输出格式                                           |
+| 参数           | 类型                           | 默认值       | 描述                                                             |
+| -------------- | ------------------------------ | ------------ | ---------------------------------------------------------------- |
+| `base`         | `BuiltinBasePresetKey`         | `'neutral'`  | base 预设 key                                                    |
+| `primary`      | `BuiltinPrimaryPresetKey`      | `'indigo'`   | primary 预设 key                                                 |
+| `feedback`     | `BuiltinFeedbackPresetKey`     | `'classic'`  | feedback 预设 key                                                |
+| `sidebar`      | `'extended'`                   | `'extended'` | 侧边栏模式；`extended` 表示由 base/primary 自动派生              |
+| `preset`       | `ThemeColorPresetItem`         | -            | 自定义完整颜色预设（提供时将忽略 base/primary/feedback/sidebar） |
+| `radius`       | `string`                       | `'0.625rem'` | 全局圆角                                                         |
+| `styleTarget`  | `'html' \| ':root'`            | `':root'`    | CSS 变量挂载目标选择器                                           |
+| `darkSelector` | `'class' \| 'media' \| string` | `'class'`    | 深色模式选择器（支持自定义字符串）                               |
+| `format`       | `'hsl' \| 'oklch'`             | `'hsl'`      | 颜色输出格式                                                     |
 
 ### 预设配置（PresetConfig）
 
 ```typescript
 interface PresetConfig {
-  base?: string;
-  primary?: string;
-  feedback?: string;
-  sidebar?: 'extended' | string;
+  base?: BuiltinBasePresetKey | 'custom';
+  primary?: BuiltinPrimaryPresetKey | 'custom';
+  feedback?: BuiltinFeedbackPresetKey | 'custom';
+  sidebar?: 'extended' | 'custom';
+  preset?: ThemeColorPresetItem;
 }
 ```
+
+当使用 `preset` 参数时，其他配置参数（base/primary/feedback/sidebar）将被忽略。
 
 #### 反馈色风格（FeedbackPaletteKey）
 
