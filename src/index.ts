@@ -30,13 +30,10 @@ export type {
   PrimaryPresetItem,
   FeedbackPresetItem,
   SidebarPresetItem,
-  SidebarExtendedPresetItem,
   ThemeColorPresetItem,
   StyleTarget,
   DarkSelector,
   ColorFormat,
-  CustomPreset,
-  FullPreset,
   PresetConfig,
   ThemeOptions
 } from './types';

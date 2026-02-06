@@ -7,7 +7,9 @@ import type {
   DarkSelector,
   FeedbackPresetItem,
   PrimaryPresetItem,
-  ThemeColorKey
+  ThemeColorKey,
+  OKLCHColor,
+  PresetKeyConfig
 } from './types';
 
 export const RADIUS_VARIABLE = '--radius';
@@ -68,6 +70,12 @@ export const EXTENDED_THEME_VARIABLES = {
   sidebarBorderAlpha: '--sidebar-border-alpha'
 };
 
+export const DEFAULT_PRESET_KEY = {
+  base: 'neutral',
+  primary: 'indigo',
+  feedback: 'classic'
+} as const satisfies PresetKeyConfig;
+
 /**
  * dark mode selectors
  */
@@ -76,17 +84,21 @@ export const DARK_SELECTOR = {
   media: '@media (prefers-color-scheme: dark)'
 } as const satisfies Record<DarkSelector, string>;
 
+const DARK_BORDER: OKLCHColor = 'oklch(100% 0 0 / 0.1)';
+
+const DARK_INPUT: OKLCHColor = 'oklch(100% 0 0 / 0.15)';
+
 /**
  * builtin base color preset
  */
 export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePresetItem> = {
   stone: {
     light: {
-      background: 'oklch(100% 0 0)',
+      background: 'white',
       foreground: 'stone.950',
-      card: 'oklch(100% 0 0)',
+      card: 'white',
       cardForeground: 'stone.950',
-      popover: 'oklch(100% 0 0)',
+      popover: 'white',
       popoverForeground: 'stone.950',
       primaryForeground: 'stone.50',
       secondary: 'stone.100',
@@ -124,17 +136,17 @@ export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePresetItem> = {
       infoForeground: 'stone.900',
       carbon: 'stone.100',
       carbonForeground: 'stone.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: DARK_BORDER,
+      input: DARK_INPUT
     }
   },
   zinc: {
     light: {
-      background: 'zinc.50',
+      background: 'white',
       foreground: 'zinc.950',
-      card: 'zinc.50',
+      card: 'white',
       cardForeground: 'zinc.950',
-      popover: 'zinc.50',
+      popover: 'white',
       popoverForeground: 'zinc.950',
       primaryForeground: 'zinc.50',
       secondary: 'zinc.100',
@@ -172,17 +184,17 @@ export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePresetItem> = {
       infoForeground: 'zinc.900',
       carbon: 'zinc.100',
       carbonForeground: 'zinc.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: DARK_BORDER,
+      input: DARK_INPUT
     }
   },
   neutral: {
     light: {
-      background: 'neutral.50',
+      background: 'white',
       foreground: 'neutral.950',
-      card: 'neutral.50',
+      card: 'white',
       cardForeground: 'neutral.950',
-      popover: 'neutral.50',
+      popover: 'white',
       popoverForeground: 'neutral.950',
       primaryForeground: 'neutral.50',
       secondary: 'neutral.100',
@@ -220,17 +232,17 @@ export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePresetItem> = {
       infoForeground: 'neutral.900',
       carbon: 'neutral.100',
       carbonForeground: 'neutral.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: DARK_BORDER,
+      input: DARK_INPUT
     }
   },
   gray: {
     light: {
-      background: 'oklch(100% 0 0)',
+      background: 'white',
       foreground: 'gray.950',
-      card: 'oklch(100% 0 0)',
+      card: 'white',
       cardForeground: 'gray.950',
-      popover: 'oklch(100% 0 0)',
+      popover: 'white',
       popoverForeground: 'gray.950',
       primaryForeground: 'gray.50',
       secondary: 'gray.100',
@@ -268,17 +280,17 @@ export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePresetItem> = {
       warningForeground: 'gray.900',
       infoForeground: 'gray.900',
       carbonForeground: 'gray.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: DARK_BORDER,
+      input: DARK_INPUT
     }
   },
   slate: {
     light: {
-      background: 'oklch(100% 0 0)',
+      background: 'white',
       foreground: 'slate.950',
-      card: 'oklch(100% 0 0)',
+      card: 'white',
       cardForeground: 'slate.950',
-      popover: 'oklch(100% 0 0)',
+      popover: 'white',
       popoverForeground: 'slate.950',
       primaryForeground: 'slate.50',
       secondary: 'slate.100',
@@ -316,8 +328,8 @@ export const builtinBasePreset: Record<BuiltinBasePresetKey, BasePresetItem> = {
       warningForeground: 'slate.900',
       infoForeground: 'slate.900',
       carbonForeground: 'slate.900',
-      border: 'oklch(100% 0 0 / 0.1)',
-      input: 'oklch(100% 0 0 / 0.15)'
+      border: DARK_BORDER,
+      input: DARK_INPUT
     }
   }
 };

@@ -1,7 +1,7 @@
 import { colord } from '@soybeanjs/colord';
-import { tailwindPalette, tailwindPaletteHsl } from '@soybeanjs/colord/palette';
+import { tailwindPalette } from '@soybeanjs/colord/palette';
 import type { PaletteColorLevel, TailwindPaletteKey, TailwindPaletteLevelColorKey } from '@soybeanjs/colord/palette';
-import type { ColorFormat, ColorValue, CustomPreset, PresetConfig } from './types';
+import type { ColorFormat, ColorValue, PresetConfig } from './types';
 
 export function keysOf<TRecord extends Record<string, unknown>>(record: TRecord) {
   return Object.keys(record) as (keyof TRecord)[];
@@ -29,15 +29,16 @@ export function getColorValue(colorValue: ColorValue, format: ColorFormat) {
   } else {
     const [paletteKey, level] = colorValue.split('.') as [TailwindPaletteKey, PaletteColorLevel];
 
-    color = format === 'hsl' ? tailwindPaletteHsl[paletteKey][level] : tailwindPalette[paletteKey][level];
+    color = tailwindPalette[paletteKey][level][format];
   }
 
   return color;
 }
 
-export function getColorPresetCacheKey<T extends CustomPreset | undefined>(config: Required<PresetConfig<T>>) {
-  // @ts-expect-error ignore generic in template string
-  const key = `base:${config.base};primary:${config.primary};feedback:${config.feedback};sidebar:${config.sidebar}`;
+export function getColorPresetCacheKey(config: PresetConfig) {
+  const { base, primary, feedback, sidebar } = config;
+
+  const key = `base:${base};primary:${primary};feedback:${feedback};sidebar:${sidebar}`;
 
   return key;
 }

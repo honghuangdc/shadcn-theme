@@ -1,14 +1,14 @@
-import { builtinBasePreset, builtinFeedbackPreset, builtinPrimaryPreset } from './constants';
+import { DEFAULT_PRESET_KEY } from './constants';
 import { generateThemePreset } from './preset';
 import { generateCSSVariables, generateRadiusCSSVariable } from './css';
 import { getColorPresetCacheKey } from './shared';
-import type { CustomPreset, FullPreset, PresetConfig, ThemeOptions } from './types';
+import type { PresetConfig, PresetKeyConfig, ThemeOptions } from './types';
 
-export function createShadcnTheme<T extends CustomPreset | undefined = undefined>(options?: ThemeOptions<T>) {
+export function createShadcnTheme(options?: ThemeOptions) {
   const {
-    base = 'gray',
-    primary = 'indigo',
-    feedback = 'classic',
+    base = DEFAULT_PRESET_KEY.base,
+    primary = DEFAULT_PRESET_KEY.primary,
+    feedback = DEFAULT_PRESET_KEY.feedback,
     sidebar = 'extended',
     preset,
     radius = '0.625rem',
@@ -17,33 +17,14 @@ export function createShadcnTheme<T extends CustomPreset | undefined = undefined
     format = 'hsl'
   } = options || {};
 
-  const fullPreset = {
-    base: {
-      ...builtinBasePreset,
-      ...preset?.base
-    },
-    primary: {
-      ...builtinPrimaryPreset,
-      ...preset?.primary
-    },
-    feedback: {
-      ...builtinFeedbackPreset,
-      ...preset?.feedback
-    },
-    sidebar: {
-      ...preset?.sidebar
-    }
-  } as FullPreset<T>;
-
   const colorCssCache = new Map<string, string>();
 
-  const getColorCss = (config: PresetConfig<T>) => {
-    const mergedConfig: Required<PresetConfig<T>> = {
-      base,
-      primary,
-      feedback,
-      sidebar,
-      ...config
+  const getColorCss = (config?: PresetConfig) => {
+    const mergedConfig: Required<PresetKeyConfig> = {
+      base: config?.base ?? base,
+      primary: config?.primary ?? primary,
+      feedback: config?.feedback ?? feedback,
+      sidebar: config?.sidebar ?? sidebar
     };
 
     const cacheKey = getColorPresetCacheKey(mergedConfig);
@@ -52,7 +33,7 @@ export function createShadcnTheme<T extends CustomPreset | undefined = undefined
       return colorCssCache.get(cacheKey)!;
     }
 
-    const themePreset = generateThemePreset(mergedConfig, fullPreset);
+    const themePreset = generateThemePreset(mergedConfig, config?.preset ?? preset);
 
     const css = generateCSSVariables(themePreset, { styleTarget, darkSelector, format });
 
@@ -61,10 +42,10 @@ export function createShadcnTheme<T extends CustomPreset | undefined = undefined
     return css;
   };
 
-  const getRadiusCss = (update: string = radius) => generateRadiusCSSVariable(update, styleTarget);
+  const getRadiusCss = (update?: string) => generateRadiusCSSVariable(update ?? radius, styleTarget);
 
-  const getCss = (config: PresetConfig<T> = { base, primary, feedback, sidebar }, radiusValue: string = radius) => {
-    const radiusCss = getRadiusCss(radiusValue);
+  const getCss = (config?: PresetConfig, radiusValue?: string) => {
+    const radiusCss = getRadiusCss(radiusValue ?? radius);
     const css = getColorCss(config);
 
     return `${radiusCss}\n\n${css}`;

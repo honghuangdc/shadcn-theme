@@ -1,4 +1,4 @@
-import type { TailwindPaletteKey, TailwindPaletteLevelColorKey } from '@soybeanjs/colord/palette';
+import type { TailwindPaletteKey, TailwindPaletteLevelColorKey, SimplePaletteKey } from '@soybeanjs/colord/palette';
 
 export interface ThemeRadius {
   /**
@@ -13,7 +13,7 @@ export type HSLColor = `hsl(${number} ${number}% ${number}%)` | `hsl(${number} $
 
 export type OKLCHColor = `oklch(${number}% ${number} ${number})` | `oklch(${number}% ${number} ${number} / ${number})`;
 
-export type ColorValue = HSLColor | OKLCHColor | TailwindPaletteLevelColorKey;
+export type ColorValue = HSLColor | OKLCHColor | SimplePaletteKey | TailwindPaletteLevelColorKey;
 
 export interface ShadcnColors {
   background?: ColorValue;
@@ -121,7 +121,7 @@ export type ThemeColorWithAlphaKey = keyof Pick<ThemeColors, 'border' | 'input' 
 /**
  * the built-in base color preset key
  */
-export type BuiltinBasePresetKey = Extract<TailwindPaletteKey, 'stone' | 'zinc' | 'neutral' | 'gray' | 'slate'>;
+export type BuiltinBasePresetKey = Extract<TailwindPaletteKey, 'neutral' | 'stone' | 'zinc' | 'slate' | 'gray'>;
 
 /**
  * the built-in primary color preset key
@@ -147,6 +147,11 @@ export type BuiltinFeedbackPresetKey =
   | 'candy'
   | 'deep'
   | 'light';
+
+/**
+ * the built-in sidebar preset key
+ */
+export type BuiltinSidebarPresetKey = 'extended';
 
 export type BasePresetColorKey = Extract<
   ThemeColorKey,
@@ -181,7 +186,15 @@ export type SidebarPresetColorKey = keyof SidebarColors;
 
 export type SidebarExtendedColorKey = Extract<
   ThemeColorKey,
-  'background' | 'foreground' | 'primary' | 'primaryForeground' | 'accent' | 'accentForeground' | 'border' | 'ring'
+  | 'background'
+  | 'foreground'
+  | 'card'
+  | 'primary'
+  | 'primaryForeground'
+  | 'accent'
+  | 'accentForeground'
+  | 'border'
+  | 'ring'
 >;
 
 export type PresetItem<K extends string> = {
@@ -197,7 +210,6 @@ export type BasePresetItem = PresetItem<BasePresetColorKey>;
 export type PrimaryPresetItem = PresetItem<PrimaryPresetColorKey>;
 export type FeedbackPresetItem = PresetItem<FeedbackPresetColorKey>;
 export type SidebarPresetItem = PresetItem<SidebarPresetColorKey>;
-export type SidebarExtendedPresetItem = PresetItem<SidebarExtendedColorKey>;
 export type ThemeColorPresetItem = PresetItem<ThemeColorKey>;
 
 export type StyleTarget = 'html' | ':root';
@@ -207,64 +219,55 @@ export type DarkSelector = 'class' | 'media';
 export type ColorFormat = 'hsl' | 'oklch';
 
 export interface CustomPreset {
-  base?: Record<string, BasePresetItem>;
-  primary?: Record<string, PrimaryPresetItem>;
-  feedback?: Record<string, FeedbackPresetItem>;
-  /**
-   * the sidebar presets
-   *
-   * if not set, will use extended colors from base and primary colors
-   */
-  sidebar?: Record<string, SidebarPresetItem>;
+  base: BasePresetItem;
+  primary: PrimaryPresetItem;
+  feedback: FeedbackPresetItem;
+  sidebar: SidebarPresetItem;
 }
-
-export type FullPreset<T extends CustomPreset | undefined> = {
-  base: Record<BuiltinBasePresetKey | (T extends CustomPreset ? keyof T['base'] : never), BasePresetItem>;
-  primary: Record<BuiltinPrimaryPresetKey | (T extends CustomPreset ? keyof T['primary'] : never), PrimaryPresetItem>;
-  feedback: Record<
-    BuiltinFeedbackPresetKey | (T extends CustomPreset ? keyof T['feedback'] : never),
-    FeedbackPresetItem
-  >;
-  sidebar?: Record<T extends CustomPreset ? keyof T['sidebar'] : never, SidebarPresetItem>;
-};
 
 /**
  * the preset config
  */
-export interface PresetConfig<T extends CustomPreset | undefined = undefined> {
+export interface PresetKeyConfig {
   /**
    * the base color key
    *
-   * @default 'gray'
+   * @default 'neutral'
    */
-  base?: keyof FullPreset<T>['base'];
-  /** the primary color key
+  base?: BuiltinBasePresetKey;
+  /**
+   * the primary color key
    *
    * @default 'indigo'
    */
-  primary?: keyof FullPreset<T>['primary'];
+  primary?: BuiltinPrimaryPresetKey;
   /**
    * the feedback color key
    *
    * @default 'classic'
    */
-  feedback?: keyof FullPreset<T>['feedback'];
+  feedback?: BuiltinFeedbackPresetKey;
   /**
    * the sidebar style key
    *
-   * @default 'extended' it means using extended colors from base and primary colors
+   * @default 'extended'
    */
-  sidebar?: 'extended' | keyof FullPreset<T>['sidebar'];
+  sidebar?: BuiltinSidebarPresetKey;
+}
+
+export interface PresetConfig extends PresetKeyConfig {
+  /**
+   * custom preset colors
+   *
+   * @description if use custom preset, need to provide all colors in the preset
+   */
+  preset?: ThemeColorPresetItem;
 }
 
 /**
  * theme options
  */
-export interface ThemeOptions<T extends CustomPreset | undefined = undefined> extends PresetConfig<T>, ThemeRadius {
-  /**
-   * custom preset colors
-   */
-  preset?: T;
+export interface ThemeOptions extends PresetConfig, ThemeRadius {
   /**
    * the border radius
    *

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@soybeanjs/colord':
-        specifier: ^0.4.0
-        version: 0.4.0
+        specifier: ^0.4.1
+        version: 0.4.1
     devDependencies:
       '@soybeanjs/cli':
         specifier: 1.5.0
@@ -526,8 +526,8 @@ packages:
     resolution: {integrity: sha512-twok1q2PFAoIcX4JJ80POd9TzKrP6tG0g1/Yhuo72BuA1iZiU/3Csl1moL6l1JJ6QR9E1vwtKMe2R7RDdTsrvg==}
     hasBin: true
 
-  '@soybeanjs/colord@0.4.0':
-    resolution: {integrity: sha512-jumErSB07+PkiA/oozGLVJcU1tMxuuAWSItUCN/n+JUFAiHtO/uXcBpHqJMcT/ChUBAD4duYLay09YjnDE6bLQ==}
+  '@soybeanjs/colord@0.4.1':
+    resolution: {integrity: sha512-gANZ4sWXtMTOPO02ShAfKov6wY56Gq8KjsnFa4l6lxG0E+V9G9zF5aPqTArFOG8czE30sxEygqNOqbGM6EwhtA==}
 
   '@soybeanjs/eslint-config@1.7.5':
     resolution: {integrity: sha512-cSRVjTHMuMOPJEBSkaKLY8zQcLvsDlcf/toGGvxIbwGDmrRnuDdrDa1KIcYaWHGVQIVIffLRFd7nmjnW9GM2pA==}
@@ -2290,7 +2290,7 @@ snapshots:
       - typescript
       - vue-eslint-parser
 
-  '@soybeanjs/colord@0.4.0': {}
+  '@soybeanjs/colord@0.4.1': {}
 
   '@soybeanjs/eslint-config@1.7.5(@typescript-eslint/utils@8.54.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.2(jiti@2.6.1))(svelte-eslint-parser@1.4.1)(typescript@5.9.3)':
     dependencies:
