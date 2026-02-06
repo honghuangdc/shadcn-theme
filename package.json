@@ -1,25 +1,27 @@
 {
   "name": "@soybeanjs/shadcn-theme",
-  "type": "module",
   "version": "0.1.0",
-  "packageManager": "pnpm@10.28.0",
   "description": "A powerful and flexible shadcn/ui theme generator with support for dynamic CSS variable injection, preset color schemes, and light/dark mode switching.",
+  "homepage": "https://github.com/soybeanjs/shadcn-theme",
+  "bugs": {
+    "url": "https://github.com/soybeanjs/shadcn-theme/issues"
+  },
+  "license": "MIT",
   "author": {
     "name": "Soybean",
     "email": "soybeanjs@outlook.com",
     "url": "https://github.com/soybeanjs"
   },
-  "license": "MIT",
-  "homepage": "https://github.com/soybeanjs/shadcn-theme",
   "repository": {
     "url": "https://github.com/soybeanjs/shadcn-theme.git"
   },
-  "bugs": {
-    "url": "https://github.com/soybeanjs/shadcn-theme/issues"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -27,33 +29,33 @@
       "require": "./dist/index.js"
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "tsdown",
     "cleanup": "soy cleanup",
     "commit": "soy git-commit",
     "dev": "tsup --watch",
-    "lint": "eslint . --fix",
+    "fmt": "oxfmt",
+    "lint": "oxlint --fix",
     "prepare": "simple-git-hooks",
     "publish-pkg": "pnpm publish --access public",
     "release": "soy release",
     "typecheck": "tsc --noEmit --skipLibCheck",
-    "update-pkg": "soy ncu"
+    "upkg": "soy ncu"
   },
   "dependencies": {
-    "@soybeanjs/colord": "^0.3.5"
+    "@soybeanjs/colord": "^0.4.0"
   },
   "devDependencies": {
-    "@soybeanjs/cli": "1.4.4",
-    "@soybeanjs/eslint-config": "1.7.5",
-    "@types/node": "25.0.9",
-    "eslint": "9.39.2",
+    "@soybeanjs/cli": "1.5.0",
+    "@types/node": "25.2.1",
     "lint-staged": "16.2.7",
+    "oxfmt": "^0.28.0",
+    "oxlint": "^1.43.0",
     "simple-git-hooks": "2.13.1",
-    "tsdown": "0.19.0",
+    "tsdown": "0.20.3",
     "tsx": "4.21.0",
     "typescript": "5.9.3"
   },
@@ -62,6 +64,7 @@
     "pre-commit": "pnpm typecheck && pnpm lint-staged"
   },
   "lint-staged": {
-    "*": "eslint --fix"
-  }
+    "*": "oxlint --fix && oxfmt"
+  },
+  "packageManager": "pnpm@10.28.2"
 }

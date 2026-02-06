@@ -1,6 +1,5 @@
 # Changelog
 
-
 ## [v0.1.0](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.11...v0.1.0) (2026-01-19)
 
 ### &nbsp;&nbsp;&nbsp;🚨 Breaking Changes
@@ -143,4 +142,3 @@
 ### &nbsp;&nbsp;&nbsp;❤️ Contributors
 
 [![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
-

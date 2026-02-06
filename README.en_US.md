@@ -269,17 +269,17 @@ theme.getRadiusCss(radius?: string): string
 
 #### ThemeOptions
 
-| Parameter | Type | Default | Description |
-|------|------|--------|------|
-| `base` | `BuiltinBasePresetKey \| string` | `'gray'` | Base preset key |
-| `primary` | `BuiltinPrimaryPresetKey \| string` | `'indigo'` | Primary preset key |
-| `feedback` | `BuiltinFeedbackPresetKey \| string` | `'classic'` | Feedback preset key |
-| `sidebar` | `'extended' \| string` | `'extended'` | Sidebar mode; `extended` derives from base/primary |
-| `preset` | `CustomPreset` | - | Custom preset collection (extends base/primary/feedback/sidebar) |
-| `radius` | `string` | `'0.625rem'` | Global border radius |
-| `styleTarget` | `'html' \| ':root'` | `':root'` | CSS variables mount selector |
-| `darkSelector` | `'class' \| 'media' \| string` | `'class'` | Dark mode selector (custom string supported) |
-| `format` | `'hsl' \| 'oklch'` | `'hsl'` | Output color format |
+| Parameter      | Type                                 | Default      | Description                                                      |
+| -------------- | ------------------------------------ | ------------ | ---------------------------------------------------------------- |
+| `base`         | `BuiltinBasePresetKey \| string`     | `'gray'`     | Base preset key                                                  |
+| `primary`      | `BuiltinPrimaryPresetKey \| string`  | `'indigo'`   | Primary preset key                                               |
+| `feedback`     | `BuiltinFeedbackPresetKey \| string` | `'classic'`  | Feedback preset key                                              |
+| `sidebar`      | `'extended' \| string`               | `'extended'` | Sidebar mode; `extended` derives from base/primary               |
+| `preset`       | `CustomPreset`                       | -            | Custom preset collection (extends base/primary/feedback/sidebar) |
+| `radius`       | `string`                             | `'0.625rem'` | Global border radius                                             |
+| `styleTarget`  | `'html' \| ':root'`                  | `':root'`    | CSS variables mount selector                                     |
+| `darkSelector` | `'class' \| 'media' \| string`       | `'class'`    | Dark mode selector (custom string supported)                     |
+| `format`       | `'hsl' \| 'oklch'`                   | `'hsl'`      | Output color format                                              |
 
 ### Preset Configuration (PresetConfig)
 
@@ -294,29 +294,30 @@ interface PresetConfig {
 
 #### Feedback Palette Key (FeedbackPaletteKey)
 
-| Style | Description | Use Cases |
-|------|------|----------|
-| `classic` | Classic Standard | Most common combination, suitable for most scenarios |
-| `vivid` | Vivid & Energetic | High saturation, suitable for youth-oriented products and creative applications |
-| `subtle` | Soft & Elegant | Low contrast, suitable for premium brands and elegant interfaces |
-| `warm` | Warm & Welcoming | Warm color tones, creates a friendly and warm atmosphere |
-| `cool` | Cool & Professional | Cool color tones, suitable for tech and professional applications |
-| `nature` | Natural & Fresh | Natural colors, suitable for eco-friendly and health products |
-| `modern` | Modern & Minimalist | Strong modern feel, suitable for tech products and SaaS applications |
-| `vibrant` | Vibrant & Dynamic | High-energy colors, suitable for sports and gaming applications |
-| `professional` | Business Professional | Stable and dignified, suitable for enterprise applications and B2B products |
-| `soft` | Dreamy & Soft | Soft tones, suitable for design tools and creative platforms |
-| `bold` | Bold & Eye-catching | High contrast, suitable for scenarios requiring strong visual impact |
-| `calm` | Calm & Soothing | Low saturation, suitable for long-term use applications |
-| `candy` | Candy Colors | Bright and cute, suitable for children's products and fun applications |
-| `deep` | Deep & Mysterious | Deep tones, suitable for dark themes and mysterious styles |
-| `light` | Fresh & Light | Light tones, suitable for clean and refreshing interfaces |
+| Style          | Description           | Use Cases                                                                       |
+| -------------- | --------------------- | ------------------------------------------------------------------------------- |
+| `classic`      | Classic Standard      | Most common combination, suitable for most scenarios                            |
+| `vivid`        | Vivid & Energetic     | High saturation, suitable for youth-oriented products and creative applications |
+| `subtle`       | Soft & Elegant        | Low contrast, suitable for premium brands and elegant interfaces                |
+| `warm`         | Warm & Welcoming      | Warm color tones, creates a friendly and warm atmosphere                        |
+| `cool`         | Cool & Professional   | Cool color tones, suitable for tech and professional applications               |
+| `nature`       | Natural & Fresh       | Natural colors, suitable for eco-friendly and health products                   |
+| `modern`       | Modern & Minimalist   | Strong modern feel, suitable for tech products and SaaS applications            |
+| `vibrant`      | Vibrant & Dynamic     | High-energy colors, suitable for sports and gaming applications                 |
+| `professional` | Business Professional | Stable and dignified, suitable for enterprise applications and B2B products     |
+| `soft`         | Dreamy & Soft         | Soft tones, suitable for design tools and creative platforms                    |
+| `bold`         | Bold & Eye-catching   | High contrast, suitable for scenarios requiring strong visual impact            |
+| `calm`         | Calm & Soothing       | Low saturation, suitable for long-term use applications                         |
+| `candy`        | Candy Colors          | Bright and cute, suitable for children's products and fun applications          |
+| `deep`         | Deep & Mysterious     | Deep tones, suitable for dark themes and mysterious styles                      |
+| `light`        | Fresh & Light         | Light tones, suitable for clean and refreshing interfaces                       |
 
 ### Theme Color Configuration (ThemeColors)
 
 Supports configuration of the following color variables:
 
 #### Base Colors
+
 - `background` - Background color
 - `foreground` - Foreground color (text)
 - `card` - Card background
@@ -338,12 +339,14 @@ Supports configuration of the following color variables:
 - `ring` - Focus ring color
 
 #### Extended Colors
+
 - `success` / `successForeground` - Success state
 - `warning` / `warningForeground` - Warning state
 - `info` / `infoForeground` - Info state
 - `carbon` / `carbonForeground` - Carbon color (additional dark scheme)
 
 #### Sidebar Colors
+
 - `sidebar` - Sidebar background
 - `sidebarForeground` - Sidebar foreground
 - `sidebarPrimary` - Sidebar primary color
@@ -354,6 +357,7 @@ Supports configuration of the following color variables:
 - `sidebarRing` - Sidebar focus ring
 
 #### Chart Colors
+
 - `chart1` ~ `chart5` - Chart colors
 
 ### Color Value Format (ColorValue)
@@ -361,22 +365,25 @@ Supports configuration of the following color variables:
 Supports three color value formats:
 
 1. **HSL Format**
+
 ```typescript
-'hsl(0 0% 100%)'
-'hsl(0 0% 100% / 0.5)' // with opacity
+'hsl(0 0% 100%)';
+'hsl(0 0% 100% / 0.5)'; // with opacity
 ```
 
 2. **OKLCH Format**
+
 ```typescript
-'oklch(100% 0 0)'
-'oklch(100% 0 0 / 0.5)' // with opacity
+'oklch(100% 0 0)';
+'oklch(100% 0 0 / 0.5)'; // with opacity
 ```
 
 3. **Tailwind Palette Reference**
+
 ```typescript
-'slate.500'
-'blue.600'
-'red.50'
+'slate.500';
+'blue.600';
+'red.50';
 ```
 
 ## 🎨 Usage Examples
@@ -533,19 +540,19 @@ module.exports = {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
           50: 'hsl(var(--primary-50))',
-          100: 'hsl(var(--primary-100))',
+          100: 'hsl(var(--primary-100))'
           // ... more shades
-        },
+        }
         // ... other colors
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        sm: 'calc(var(--radius) - 4px)'
       }
     }
   }
-}
+};
 ```
 
 When you use `format: 'hsl'`, opacity must be handled separately, especially for `border` / `input` / `sidebarBorder`:
@@ -555,20 +562,20 @@ When you use `format: 'hsl'`, opacity must be handled separately, especially for
 
 ```js
 // Use the generated alpha value
-border: 'hsl(var(--border) / var(--border-alpha))'
+border: 'hsl(var(--border) / var(--border-alpha))';
 ```
 
 If you want Tailwind opacity modifiers to work (e.g. `border-border/50`), use the `<alpha-value>` placeholder (in this case you typically don't use `--border-alpha`):
 
 ```js
 // Let Tailwind inject opacity
-border: 'hsl(var(--border) / <alpha-value>)'
+border: 'hsl(var(--border) / <alpha-value>)';
 ```
 
 If you use `format: 'oklch'`, since the variable value already contains `oklch(...)`, use `var(--xxx)` directly in Tailwind (no extra `oklch(...)` wrapper needed):
 
 ```js
-background: 'var(--background)'
+background: 'var(--background)';
 ```
 
 ### Using in CSS
