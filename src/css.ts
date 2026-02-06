@@ -1,6 +1,6 @@
 import { generatePalette } from '@soybeanjs/colord/palette';
 import { COLOR_VARIABLES, DARK_SELECTOR, EXTENDED_THEME_VARIABLES, RADIUS_VARIABLE } from './constants';
-import { getColorValue, keysOf, removeHslBrackets } from './shared';
+import { getColorValue, keysOf, removeHslBrackets, isUnTransformedColor } from './shared';
 import type {
   ColorFormat,
   ColorValue,
@@ -71,7 +71,9 @@ function getItemColorCSSVariables(key: ThemeColorKey, format: ColorFormat, prese
 function getAlphaCSSVariables(colorValue: string, format: ColorFormat, key: string) {
   const alphaKeys: ThemeColorWithAlphaKey[] = ['border', 'input', 'sidebarBorder'];
 
-  if (format === 'oklch' || !alphaKeys.includes(key as ThemeColorWithAlphaKey)) {
+  const untransformed = isUnTransformedColor(colorValue as ColorValue);
+
+  if (untransformed || format === 'oklch' || !alphaKeys.includes(key as ThemeColorWithAlphaKey)) {
     return {
       color: colorValue,
       alphaCss: ''

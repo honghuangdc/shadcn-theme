@@ -46,7 +46,7 @@
     "upkg": "soy ncu"
   },
   "dependencies": {
-    "@soybeanjs/colord": "^0.4.1"
+    "@soybeanjs/colord": "^0.4.2"
   },
   "devDependencies": {
     "@soybeanjs/cli": "1.5.0",
