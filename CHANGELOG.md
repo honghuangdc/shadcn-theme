@@ -1,5 +1,27 @@
 # Changelog
 
+## [v0.2.0](https://github.com/soybeanjs/shadcn-theme/compare/v0.1.0...v0.2.0) (2026-02-07)
+
+### &nbsp;&nbsp;&nbsp;🚨 Breaking Changes
+
+- **projects**: refactor custom preset &nbsp;-&nbsp; by @soybeanjs [<samp>(b8af5)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/b8af55a)
+
+### &nbsp;&nbsp;&nbsp;🛠 Optimizations
+
+- **parse**: improve parse color logic &nbsp;-&nbsp; by @soybeanjs [<samp>(0b9dc)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/0b9dc28)
+
+### &nbsp;&nbsp;&nbsp;📖 Documentation
+
+- **README**: update custom preset section for clarity and completeness &nbsp;-&nbsp; by @soybeanjs [<samp>(2b42d)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/2b42dac)
+
+### &nbsp;&nbsp;&nbsp;🏡 Chore
+
+- **projects**: use oxlint and oxfmt to eslint and prettier &nbsp;-&nbsp; by @soybeanjs [<samp>(71d16)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/71d16c8)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
+
 ## [v0.1.0](https://github.com/soybeanjs/shadcn-theme/compare/v0.0.11...v0.1.0) (2026-01-19)
 
 ### &nbsp;&nbsp;&nbsp;🚨 Breaking Changes
