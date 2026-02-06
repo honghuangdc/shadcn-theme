@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.2.2](https://github.com/soybeanjs/shadcn-theme/compare/v0.2.1...v0.2.2) (2026-02-07)
+
+### &nbsp;&nbsp;&nbsp;🐞 Bug Fixes
+
+- **css**: correct palette CSS variable generation in dark mode &nbsp;-&nbsp; by @soybeanjs [<samp>(c0e72)</samp>](https://github.com/soybeanjs/shadcn-theme/commit/c0e721a)
+
+### &nbsp;&nbsp;&nbsp;❤️ Contributors
+
+[![soybeanjs](https://github.com/soybeanjs.png?size=48)](https://github.com/soybeanjs)&nbsp;&nbsp;
+
 ## [v0.2.1](https://github.com/soybeanjs/shadcn-theme/compare/v0.2.0...v0.2.1) (2026-02-07)
 
 ### &nbsp;&nbsp;&nbsp;🛠 Optimizations
