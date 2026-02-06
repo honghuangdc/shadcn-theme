@@ -792,13 +792,13 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
     light: {
       destructive: 'red.500',
       success: 'green.500',
-      warning: 'yellow.500',
+      warning: 'amber.500',
       info: 'blue.500'
     },
     dark: {
       destructive: 'red.400',
       success: 'green.400',
-      warning: 'yellow.400',
+      warning: 'amber.400',
       info: 'blue.400'
     }
   },
@@ -827,9 +827,9 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
   subtle: {
     light: {
       destructive: 'rose.500',
-      success: 'emerald.600',
-      warning: 'amber.600',
-      info: 'indigo.600'
+      success: 'emerald.500',
+      warning: 'amber.500',
+      info: 'indigo.500'
     },
     dark: {
       destructive: 'rose.300',
@@ -844,10 +844,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   warm: {
     light: {
-      destructive: 'red.600',
-      success: 'lime.600',
-      warning: 'orange.600',
-      info: 'amber.700'
+      destructive: 'red.500',
+      success: 'lime.500',
+      warning: 'orange.500',
+      info: 'amber.600'
     },
     dark: {
       destructive: 'red.400',
@@ -862,10 +862,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   cool: {
     light: {
-      destructive: 'rose.600',
-      success: 'teal.600',
-      warning: 'cyan.700',
-      info: 'blue.600'
+      destructive: 'rose.500',
+      success: 'teal.500',
+      warning: 'cyan.600',
+      info: 'blue.500'
     },
     dark: {
       destructive: 'rose.400',
@@ -880,10 +880,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   nature: {
     light: {
-      destructive: 'red.700',
-      success: 'green.700',
-      warning: 'lime.700',
-      info: 'teal.700'
+      destructive: 'red.500',
+      success: 'green.600',
+      warning: 'lime.600',
+      info: 'teal.600'
     },
     dark: {
       destructive: 'red.300',
@@ -898,13 +898,13 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   modern: {
     light: {
-      destructive: 'rose.600',
-      success: 'emerald.600',
-      warning: 'orange.600',
-      info: 'sky.600'
+      destructive: 'red.500',
+      success: 'emerald.500',
+      warning: 'orange.500',
+      info: 'sky.500'
     },
     dark: {
-      destructive: 'rose.400',
+      destructive: 'red.400',
       success: 'emerald.400',
       warning: 'orange.400',
       info: 'sky.400'
@@ -916,10 +916,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   vibrant: {
     light: {
-      destructive: 'pink.600',
-      success: 'lime.600',
-      warning: 'amber.600',
-      info: 'cyan.600'
+      destructive: 'red.500',
+      success: 'lime.500',
+      warning: 'amber.500',
+      info: 'cyan.500'
     },
     dark: {
       destructive: 'pink.400',
@@ -934,10 +934,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   professional: {
     light: {
-      destructive: 'red.700',
-      success: 'green.700',
-      warning: 'amber.700',
-      info: 'blue.700'
+      destructive: 'red.500',
+      success: 'green.600',
+      warning: 'amber.600',
+      info: 'blue.600'
     },
     dark: {
       destructive: 'red.300',
@@ -952,10 +952,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   soft: {
     light: {
-      destructive: 'rose.500',
-      success: 'teal.500',
-      warning: 'yellow.500',
-      info: 'violet.500'
+      destructive: 'rose.400',
+      success: 'teal.400',
+      warning: 'yellow.400',
+      info: 'violet.400'
     },
     dark: {
       destructive: 'rose.300',
@@ -970,10 +970,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   bold: {
     light: {
-      destructive: 'red.700',
-      success: 'emerald.700',
-      warning: 'orange.700',
-      info: 'blue.700'
+      destructive: 'red.600',
+      success: 'emerald.600',
+      warning: 'orange.600',
+      info: 'blue.600'
     },
     dark: {
       destructive: 'red.300',
@@ -988,10 +988,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   calm: {
     light: {
-      destructive: 'rose.600',
-      success: 'teal.600',
-      warning: 'amber.600',
-      info: 'slate.600'
+      destructive: 'rose.500',
+      success: 'teal.500',
+      warning: 'amber.500',
+      info: 'slate.500'
     },
     dark: {
       destructive: 'rose.400',
@@ -1006,10 +1006,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   candy: {
     light: {
-      destructive: 'pink.500',
-      success: 'emerald.500',
-      warning: 'yellow.500',
-      info: 'sky.500'
+      destructive: 'pink.400',
+      success: 'emerald.400',
+      warning: 'yellow.400',
+      info: 'sky.400'
     },
     dark: {
       destructive: 'pink.300',
@@ -1024,10 +1024,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   deep: {
     light: {
-      destructive: 'red.800',
-      success: 'green.800',
-      warning: 'amber.800',
-      info: 'blue.800'
+      destructive: 'red.600',
+      success: 'green.700',
+      warning: 'amber.700',
+      info: 'blue.700'
     },
     dark: {
       destructive: 'red.200',
@@ -1042,10 +1042,10 @@ export const builtinFeedbackPreset: Record<BuiltinFeedbackPresetKey, FeedbackPre
    */
   light: {
     light: {
-      destructive: 'red.500',
-      success: 'emerald.500',
-      warning: 'amber.500',
-      info: 'sky.500'
+      destructive: 'red.400',
+      success: 'emerald.400',
+      warning: 'amber.400',
+      info: 'sky.400'
     },
     dark: {
       destructive: 'red.400',
