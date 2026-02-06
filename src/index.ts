@@ -30,6 +30,7 @@ export type {
   FeedbackPreset,
   SidebarPreset,
   ThemeColorPreset,
+  CustomThemeColorPreset,
   StyleTarget,
   DarkSelector,
   ColorFormat,
